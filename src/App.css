@@ -543,6 +543,7 @@ samp {
   align-items: center; /* Canh chỉnh nội dung theo chiều dọc (giữa) */
 }
 .background-button-top-coin-display {
+  position: relative;
   display: flex;
   justify-content: center;
 }
@@ -551,8 +552,9 @@ samp {
   color: #fff; /* Màu chữ cho button được chọn */
 }
 
+
 .list-top-coin-display {
-  padding: 4px 12px;
+  padding: 0 12px;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
 }
@@ -567,9 +569,13 @@ samp {
   height: 90%;
 }
 .list-top-coin-background {
+  position: absolute;
   width: 100%;
-  height: 70%;
+  height: 220px;
+  top: 46px;
+  overflow: auto;
 }
+
 .id-top-coin {
   font-weight: 600;
   font-size: 0.875rem;
@@ -592,7 +598,7 @@ samp {
 }
 .display-body {
   width: 1260px;
-  margin: 0 auto;
+  margin: 120px auto 20px auto;
 }
 .text-nick-lien-quan {
   font-size: 1.125rem;
@@ -624,17 +630,19 @@ samp {
 }
 .menu-list-acc-lien-quan {
   display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .img-list-acc-lien-quan {
 
-  width: 95%;
+  width: 100%;
   border-radius: 5px;
 }
 .text-list-acc-lien-quan {
   font-size: .875rem;
     line-height: 1.25rem;
     font-weight: 500;
-    width: 70%;
+    width: 90%;
 }
 .description-list-acc-lien-quan {
   font-size: .875rem;
@@ -644,5 +652,156 @@ samp {
     width: 90%;
 }
 .list-acc-lien-quan {
+  flex-basis: calc(24%);
   margin-top: 16px;
+  margin-right: 10px;
+}
+.thu-van-may-body {
+  margin-top: 20px;
+}
+.background-text-give-list-top-coin-display {
+  padding: 4px 12px;
+  overflow: auto;
+  background-color: #fff;
+}
+.text-background-text-give-list-top-coin-display {
+  font-weight: bolder;
+  font-size: 16px;
+}
+.description-background-text-give-list-top-coin-display {
+  color: #dc2626;
+}
+.header-main {
+  background-color: #fff;
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+}
+.header-main.scrolled {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng khi cuộn */
+  /* Các thuộc tính khác cho header khi được cuộn */
+}
+.body-lq-top-up {
+  width: 1260px;  
+  height: 36px;
+  margin: 0 auto;
+}
+
+.background-body-lq-top-up {
+  width: 100%;
+ 
+}
+.header-body-top-up {
+  width: 100%;
+  background-color: #fff;
+}
+.body-lq-top-up-sub {
+  display: flex;
+  align-items: center;
+  width: 1260px;  
+  height: 36px;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+.content-body-lq-top-up-sub {
+  display: flex;
+  align-items: center;
+}
+.content-body-lq-top-up-sub > img {
+  height: 24px;
+  margin-left: 10px;
+}
+.content-body-lq-top-up-sub > div {
+  margin-left: 10px;
+}
+.text-body-lq-top-up-sub{
+  font-weight: 500;
+}
+.background-body-top-up-bottom {
+  display: flex;
+  
+}
+.body-top-up-bottom {
+  background-color: #fff;
+  flex: 1;
+  text-align: center;
+  padding: 16px 20px;
+  margin: 0 5px; /* Tạo khoảng trống 5px giữa các phần */
+  border-radius: 5px;
+}
+.display-body-top-up-bottom {
+  margin: 36px auto;
+}
+.text-body-top-up-bottom{
+  font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: #dc2626;
+}
+.icon-top-up-bottom {
+  color: #dc2626;
+  font-size: 4.5rem !important;
+}
+.display-background-footer {
+  background-color: #282c34;
+  width: 100%;
+  padding: 40px 0;
+}
+.footer-background {
+  width: 1260px;
+  margin: 0 auto;
+  display: flex;
+}
+.footer{
+  flex: 1;
+  margin: 0 10px;
+  color: #fff;
+}
+.footer-text-shop-game{
+  line-height: 1.5rem;
+  font-weight: 500;
+  font-size: .875rem;
+  margin-bottom: .75rem;
+}
+.footer-text-he-thong{
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  margin-bottom: .25rem;
+    margin-top: .25rem;
+    color: #dc2626;
+}
+.footer-text-chung-toi{
+  line-height: 1.5rem;
+  margin-bottom: .75rem;
+  font-size: 14px;
+}
+.footer-logo {
+  height: 3rem;
+}
+.footer-thong-tin{
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: .75rem;
+}
+.footer-body-thong-tin {
+  font-size: .875rem;
+    line-height: 1.25rem;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    background-color: #555555;
+    border-radius: .25rem;
+    margin-bottom: .5rem;
+}
+.img-lien-he{
+  width: 15rem;
+  height: auto;
+  max-width: 100%;
 }

@@ -65,35 +65,33 @@ export default function BodyLQ() {
               NICK TRÊN 3 TRIỆU
             </div>
           </Link>
-        </div>
-        <div className="menu-list-acc-lien-quan">
-          <Link to="#" className="list-acc-lien-quan"               style={{ width: '25%'}}>
+          <Link to="#" className="list-acc-lien-quan">
             <img
               src="https://sys.tmso1.co/images/sdFYsCSjG9TDhtH.gif"
               alt=""
               className="img-list-acc-lien-quan"
-
             ></img>
             <div className="text-list-acc-lien-quan">NICK LIÊN QUÂN REG</div>
             <div className="description-list-acc-lien-quan">
               XẢ BẰNG GIÁ NHẬP - GIÁ RẺ NHƯ CHO
             </div>
           </Link>
-          <Link to="#" className="list-acc-lien-quan" >
+          <Link to="#" className="list-acc-lien-quan">
             <img
               src="https://sys.tmso1.co/images/nQEIqRxrOG2LiGZ.gif"
               alt=""
               className="img-list-acc-lien-quan"
-              style={{ width: '86%'}}
             ></img>
-            <div className="text-list-acc-lien-quan">NICK LIÊN QUÂN LIÊN KẾT SỐNG</div>
+            <div className="text-list-acc-lien-quan">
+              NICK LIÊN QUÂN LIÊN KẾT SỐNG
+            </div>
             <div className="description-list-acc-lien-quan">
-            BẢO HÀNH VĨNH VIỄN - LỖI HOÀN 100%
+              BẢO HÀNH VĨNH VIỄN - LỖI HOÀN 100%
             </div>
           </Link>
         </div>
       </div>
-      <div className="body-lq" style={{ marginTop: '50px' }}>
+      <div className="body-lq thu-van-may-body">
         {/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
         <div className="display-nick-lien-quan">
           <div className="text-nick-lien-quan">
@@ -146,8 +144,6 @@ export default function BodyLQ() {
             <div className="text-list-acc-lien-quan">THỬ VẬN MAY VIP 3</div>
             <div className="description-list-acc-lien-quan">70.000 VNĐ</div>
           </Link>
-        </div>
-        <div className="menu-list-acc-lien-quan">
           <Link to="#" className="list-acc-lien-quan">
             <img
               src="https://sys.tmso1.co/images/GYeTXuHnM6F3HbY.gif"
@@ -184,9 +180,6 @@ export default function BodyLQ() {
             <div className="text-list-acc-lien-quan">THỬ VẬN MAY VIP 7</div>
             <div className="description-list-acc-lien-quan">300.000 VNĐ</div>
           </Link>
-        </div>
-        {/* aaaaa */}
-        <div className="menu-list-acc-lien-quan">
           <Link to="#" className="list-acc-lien-quan">
             <img
               src="https://sys.tmso1.co/images/e1u4r7JsiC9RiGj.gif"
@@ -224,6 +217,26 @@ export default function BodyLQ() {
             ></img>
             <div className="text-list-acc-lien-quan">VÒNG QUAY SKIN SSS</div>
             <div className="description-list-acc-lien-quan">19.000 VNĐ</div>
+          </Link>
+          <Link to="#" className="list-acc-lien-quan">
+            <img
+              src="https://sys.tmso1.co/images/b0qDX6KCkTMOWfx.gif"
+              alt=""
+              className="img-list-acc-lien-quan"
+            ></img>
+            <div className="text-list-acc-lien-quan">VÒNG QUAY QUÂN HUY</div>
+            <div className="description-list-acc-lien-quan">10.000 VNĐ</div>
+          </Link>
+          <Link to="#" className="list-acc-lien-quan">
+            <img
+              src="https://sys.tmso1.co/images/Nb1lFLDiWUw3j2a.gif"
+              alt=""
+              className="img-list-acc-lien-quan"
+            ></img>
+            <div className="text-list-acc-lien-quan">
+              VÒNG QUAY MÙA S1 - 2024
+            </div>
+            <div className="description-list-acc-lien-quan">15.000 VNĐ</div>
           </Link>
         </div>
       </div>

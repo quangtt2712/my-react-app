@@ -61,55 +61,88 @@ export default function Body() {
                 Phần thưởng
               </div>
             </div>
-          </div>
-          <div className="list-top-coin-background">
-            <div className="list-top-coin-display">
-              <div className="list-top-coin">
-                <img
-                  src="https://shopmailk.com/1.svg"
-                  alt="số 1"
-                  className="img-top-coin"
-                ></img>
-                <div className="id-top-coin">ID 1081006</div>
-                <div className="many-top-coin">1,540,000đ</div>
+            {(selectedButton === 0 || selectedButton === 1) && (
+              <div className="list-top-coin-background">
+                <div className="list-top-coin-display">
+                  <div className="list-top-coin">
+                    <img
+                      src="https://shopmailk.com/1.svg"
+                      alt="số 1"
+                      className="img-top-coin"
+                    ></img>
+                    <div className="id-top-coin">ID 1081006</div>
+                    <div className="many-top-coin">1,540,000đ</div>
+                  </div>
+                  <div className="list-top-coin">
+                    <img
+                      src="https://shopmailk.com/2.svg"
+                      alt="số 1"
+                      className="img-top-coin"
+                    ></img>
+                    <div className="id-top-coin">ID 1081006</div>
+                    <div className="many-top-coin">1,540,000đ</div>
+                  </div>
+                  <div className="list-top-coin">
+                    <img
+                      src="https://shopmailk.com/3.svg"
+                      alt="số 1"
+                      className="img-top-coin"
+                    ></img>
+                    <div className="id-top-coin">ID 1081006</div>
+                    <div className="many-top-coin">1,540,000đ</div>
+                  </div>
+                  <div className="list-top-coin">
+                    <img
+                      src="https://shopmailk.com/4.svg"
+                      alt="số 1"
+                      className="img-top-coin"
+                    ></img>
+                    <div className="id-top-coin">ID 1081006</div>
+                    <div className="many-top-coin">1,540,000đ</div>
+                  </div>
+                  <div className="list-top-coin">
+                    <img
+                      src="https://shopmailk.com/5.svg"
+                      alt="số 1"
+                      className="img-top-coin"
+                    ></img>
+                    <div className="id-top-coin">ID 1081006</div>
+                    <div className="many-top-coin">1,540,000đ</div>
+                  </div>
+                </div>
               </div>
-              <div className="list-top-coin">
-              <img
-                  src="https://shopmailk.com/2.svg"
-                  alt="số 1"
-                  className="img-top-coin"
-                ></img>
-                <div className="id-top-coin">ID 1081006</div>
-                <div className="many-top-coin">1,540,000đ</div>
+            )}
+            {selectedButton === 2 && (
+              <div className="list-top-coin-background">
+                <div className="background-text-give-list-top-coin-display">
+                  <div className="text-background-text-give-list-top-coin-display">
+                    <p>TOP Nạp Thẻ Chốt Vào Ngày Cuối Tháng:</p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      TOP 1: 5.000 QUÂN HUY
+                    </p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      TOP 2: 4.000 QUÂN HUY
+                    </p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      TOP 3: 3.000 QUÂN HUY
+                    </p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      TOP 4: 2.000 QUÂN HUY
+                    </p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      TOP 5: 1.000 QUÂN HUY
+                    </p>
+                    <p>Shop Sẽ Chọn Thêm 30 Bạn Ngẫu Nhiên:</p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      10 Bạn Nạp Trên 200k Sẽ Nhận Được: 500 QH
+                    </p>
+                    <p className="description-background-text-give-list-top-coin-display">
+                      10 Bạn Nạp Trên 100k Sẽ Nhận Được: 300 QH
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="list-top-coin">
-              <img
-                  src="https://shopmailk.com/3.svg"
-                  alt="số 1"
-                  className="img-top-coin"
-                ></img>
-                <div className="id-top-coin">ID 1081006</div>
-                <div className="many-top-coin">1,540,000đ</div>
-              </div>
-              <div className="list-top-coin">
-              <img
-                  src="https://shopmailk.com/4.svg"
-                  alt="số 1"
-                  className="img-top-coin"
-                ></img>
-                <div className="id-top-coin">ID 1081006</div>
-                <div className="many-top-coin">1,540,000đ</div>
-              </div>
-              <div className="list-top-coin">
-              <img
-                  src="https://shopmailk.com/5.svg"
-                  alt="số 1"
-                  className="img-top-coin"
-                ></img>
-                <div className="id-top-coin">ID 1081006</div>
-                <div className="many-top-coin">1,540,000đ</div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
