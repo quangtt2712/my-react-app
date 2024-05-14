@@ -890,6 +890,9 @@ samp {
   .header{
     position: sticky;
   }
+  .link-kham-pha-nick-lien-quan{
+    padding: 5px 6px;
+  }
 }
 .mySwiper {
   width: 100%;
