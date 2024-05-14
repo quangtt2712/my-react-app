@@ -1,8 +1,21 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Swipers from "./swiper";
 
 export default function Body() {
   const [selectedButton, setSelectedButton] = useState(0); // State để lưu trữ button được chọn
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Hàm để xử lý sự kiện khi button được nhấn
   const handleButtonClick = (buttonIndex) => {
@@ -12,21 +25,27 @@ export default function Body() {
   return (
     <div className="body">
       <div className="back-ground-main">
-        <img
-          src="https://sys.tmso1.co/images/w7YkpCKrrhCU33Z.png"
-          alt="background"
-          className="background-main"
-        />
-        <img
-          src="https://sys.tmso1.co/images/3MWk1eA8gNDxBXt.jpeg"
-          alt="background"
-          className="background-sub-main"
-        />
-        <img
-          src="https://sys.tmso1.co/images/hnV2QAWJDslY7zk.jpeg"
-          alt="background"
-          className="background-cover-main"
-        />
+      {isMobile ? (
+          <Swipers />
+        ) : (
+          <>
+            <img
+              src="https://sys.tmso1.co/images/w7YkpCKrrhCU33Z.png"
+              alt="background"
+              className="background-main"
+            />
+            <img
+              src="https://sys.tmso1.co/images/3MWk1eA8gNDxBXt.jpeg"
+              alt="background"
+              className="background-sub-main"
+            />
+            <img
+              src="https://sys.tmso1.co/images/hnV2QAWJDslY7zk.jpeg"
+              alt="background"
+              className="background-cover-main"
+            />
+          </>
+        )}
         <div className="background-top-coin">
           <div>
             <div className="background-top-coin-display">
