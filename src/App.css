@@ -863,6 +863,33 @@ samp {
     margin-top: 20px;
     height: 320px;
   }
+  .body-lq{
+    padding: 0 20px;
+  }
+  .list-acc-lien-quan {
+    flex-basis: calc(47%);
+  }
+  .header-body-top-up {
+    display: none;
+  }
+  .display-body-top-up-bottom{
+    padding: 0 20px;
+  }
+  .background-body-top-up-bottom{
+    flex-wrap: wrap;
+    
+  }
+  .body-top-up-bottom{
+    margin-top: 10px;
+    flex-basis: calc(47%);
+  }
+  .footer-background{
+    width: 100%;
+    display: block;
+  }
+  .header{
+    position: sticky;
+  }
 }
 .mySwiper {
   width: 100%;
