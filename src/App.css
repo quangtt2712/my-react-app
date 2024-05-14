@@ -863,7 +863,7 @@ samp {
     margin-top: 20px;
     height: 320px;
   }
-  .body-lq{
+  .body-lq {
     padding: 0 20px;
   }
   .list-acc-lien-quan {
@@ -872,26 +872,28 @@ samp {
   .header-body-top-up {
     display: none;
   }
-  .display-body-top-up-bottom{
+  .display-body-top-up-bottom {
     padding: 0 20px;
   }
-  .background-body-top-up-bottom{
+  .background-body-top-up-bottom {
     flex-wrap: wrap;
-    
   }
-  .body-top-up-bottom{
+  .body-top-up-bottom {
     margin-top: 10px;
     flex-basis: calc(47%);
   }
-  .footer-background{
+  .footer-background {
     width: 100%;
     display: block;
   }
-  .header{
+  .header {
     position: sticky;
   }
-  .link-kham-pha-nick-lien-quan{
+  .link-kham-pha-nick-lien-quan {
     padding: 5px 6px;
+  }
+  .menu-toggle {
+    display: block !important; /* Hiển thị nút toggle trên màn hình nhỏ */
   }
 }
 .mySwiper {
@@ -899,8 +901,20 @@ samp {
   height: 100%;
   border-radius: 5px;
 }
-.img-swiper{
+.img-swiper {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+}
+.menu-toggle {
+  padding: 5px 15px;
+  border-radius: 5px;
+  display: none;
+  color: rgb(220, 38, 38);
+  cursor: pointer;
+  background-color: rgb(254, 242, 242);
+}
+.toogle-display-menu {
+  display: flex;
+  align-items: center;
 }
