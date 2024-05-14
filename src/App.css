@@ -918,3 +918,64 @@ samp {
   display: flex;
   align-items: center;
 }
+.nav__overlay{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+.nav-mobile{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  max-width: 100%;
+  background-color: #fff;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out; 
+}
+.nav-mobile.open {
+  transform: translateX(0%); /* Hiển thị menu khi mở */
+  overflow: auto;
+}
+.nav-bar-mobile {
+  margin-top: 24px;
+}
+.nav-bar-item-mobile{
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #dc2626;
+  display: block;
+  padding: 8px 0;
+  padding-left: 20px;
+  font-size: 1rem;
+  border-bottom: 1px dashed #ec4896;
+}
+.icon-clear{
+  font-size: 1.4rem;
+  color: #dc2626;
+  position: absolute;
+  top: 2rem;
+  right: 20px;
+}
+.text-display-item-mobile{
+  padding-left: 10px;
+  text-transform: capitalize;
+}
+.nav-bar-item-sub-item-mobile {
+  padding-left: 20px;
+  text-transform: capitalize;
+}
+.nav-bar-item-sub-thach-dau-mobile{
+  padding-left: 20px;
+  text-transform: capitalize;
+}
+.nav-bar-item-sub-chien-tuong-mobile{
+  padding-left: 20px;
+  text-transform: capitalize;
+}
