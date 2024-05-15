@@ -824,9 +824,6 @@ samp {
   .header-logo {
     display: inline-block;
   }
-  .search-box {
-    display: none;
-  }
 
   .body {
     width: 100%;
@@ -895,6 +892,48 @@ samp {
   .menu-toggle {
     display: block !important; /* Hiển thị nút toggle trên màn hình nhỏ */
   }
+  .display-background-footer {
+    padding-bottom: 120px;
+  }
+  .bottom-bar {
+    display: block !important;
+  }
+  .search-box{
+    margin-left: 10px;
+    z-index: 1000;
+    width: 80%;
+  }
+  .bottom-bar-screen {
+    width: 100%;
+    position: relative;
+  }
+  .list-search{
+    width: 100%;
+    overflow: auto;
+    color: #282c34;
+    bottom: 36px;
+    top: auto;
+  }
+}
+.text-background-searchlist-bottom{
+  color: #282c34;
+}
+.background-searchlist-bottom {
+  width: 100%;
+  background-color: #fff;
+  z-index: 1001;
+  bottom: 66px;
+  left: 0;
+  position: absolute;
+  padding: 10px 0;
+  border-bottom: solid 1px #dc2626;
+}
+.bottom-bar-search-list {
+  width: 100%;
+  position: absolute;
+  bottom: 50px; /* Adjust as needed to position above bottom-bar */
+  left: 0;
+  z-index: 1000; /* Ensure it appears above other elements */
 }
 .mySwiper {
   width: 100%;
@@ -918,17 +957,16 @@ samp {
   display: flex;
   align-items: center;
 }
-.nav__overlay{
+.nav__overlay {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
-
 }
 
-.nav-mobile{
+.nav-mobile {
   position: fixed;
   top: 0;
   left: 0;
@@ -937,7 +975,7 @@ samp {
   max-width: 100%;
   background-color: #fff;
   transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out; 
+  transition: transform 0.3s ease-in-out;
 }
 .nav-mobile.open {
   transform: translateX(0%); /* Hiển thị menu khi mở */
@@ -946,7 +984,7 @@ samp {
 .nav-bar-mobile {
   margin-top: 24px;
 }
-.nav-bar-item-mobile{
+.nav-bar-item-mobile {
   text-transform: uppercase;
   font-weight: 600;
   color: #dc2626;
@@ -956,14 +994,14 @@ samp {
   font-size: 1rem;
   border-bottom: 1px dashed #ec4896;
 }
-.icon-clear{
+.icon-clear {
   font-size: 1.4rem;
   color: #dc2626;
   position: absolute;
   top: 2rem;
   right: 20px;
 }
-.text-display-item-mobile{
+.text-display-item-mobile {
   padding-left: 10px;
   text-transform: capitalize;
 }
@@ -971,11 +1009,51 @@ samp {
   padding-left: 20px;
   text-transform: capitalize;
 }
-.nav-bar-item-sub-thach-dau-mobile{
+.nav-bar-item-sub-thach-dau-mobile {
   padding-left: 20px;
   text-transform: capitalize;
 }
-.nav-bar-item-sub-chien-tuong-mobile{
+.nav-bar-item-sub-chien-tuong-mobile {
   padding-left: 20px;
   text-transform: capitalize;
+}
+.bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  color: white;
+  text-align: center;
+  padding: 8px 4px;
+  border-top-width: 1px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Đảm bảo thanh cố định hiển thị trên cùng */
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-item {
+  text-align: center; /* Căn giữa nội dung trong các phần */
+  color: #282c34;
+}
+.icon-bottom-bar {
+  font-size: 1.5rem;
+}
+.text-icon-bottom-bar {
+  font-weight: 700;
+  font-size: small;
+  line-height: 1.25rem;
+  font-size: 80%;
+}
+.icon-color-bottom-bar{
+  color: #dc2626;
+}
+.bottom-bar-search{
+  display: flex;
+}
+.bottom-bar-search-list {
+  position: relative;
 }

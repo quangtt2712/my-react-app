@@ -13,9 +13,21 @@ import BodyTopUpBottom from "./BodyTopUpBottom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Footer from "./Footer";
 import ClearIcon from "@mui/icons-material/Clear";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { colors } from "@mui/material";
 
 export default function Header() {
   const [openSubMenus, setOpenSubMenus] = useState({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
+
+  const toggleSearchList = () => {
+    setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
+  };
+
   const toggleSubMenu = (index) => {
     setOpenSubMenus((prevState) => ({
       ...prevState,
@@ -40,9 +52,16 @@ export default function Header() {
         setScrolled(false);
       }
     };
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
+    };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -338,7 +357,7 @@ export default function Header() {
                   alt="logo"
                 />
               </div>
-              <SearchList />
+              {!isMobile && <SearchList />}
             </div>
             <div className="user-controls">
               <div className="top-up-and-icon" type="button">
@@ -373,6 +392,34 @@ export default function Header() {
       </div>
       <div className="display-background-footer">
         <Footer />
+      </div>
+
+      <div class="bottom-bar">
+        {( isSearchListOpen) && (
+          <diV className="background-searchlist-bottom">
+            <SearchList className="bottom-bar-search-list" />
+          </diV>
+        )}
+        <div class="grid-container">
+          <div class="grid-item">
+            <HomeIcon className="icon-bottom-bar icon-color-bottom-bar" />
+            <div className="text-icon-bottom-bar icon-color-bottom-bar">
+              Trang chủ
+            </div>
+          </div>
+          <div class="grid-item" onClick={toggleSearchList}>
+            <SearchIcon className="icon-bottom-bar" />
+            <div className="text-icon-bottom-bar">Tìm kiếm</div>
+          </div>
+          <div class="grid-item">
+            <AccountBalanceWalletIcon className="icon-bottom-bar" />
+            <div className="text-icon-bottom-bar">Nạp tiền</div>
+          </div>
+          <div class="grid-item">
+            <AccountCircleIcon className="icon-bottom-bar" />
+            <div className="text-icon-bottom-bar">Tài khoản</div>
+          </div>
+        </div>
       </div>
     </>
   );
