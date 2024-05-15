@@ -897,6 +897,7 @@ samp {
   }
   .bottom-bar {
     display: block !important;
+
   }
   .search-box{
     margin-left: 10px;
@@ -1029,7 +1030,7 @@ samp {
   padding: 8px 4px;
   border-top-width: 1px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Đảm bảo thanh cố định hiển thị trên cùng */
+  z-index: 2; /* Đảm bảo thanh cố định hiển thị trên cùng */
 }
 .grid-container {
   display: grid;
