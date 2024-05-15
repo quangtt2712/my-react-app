@@ -18,24 +18,31 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { colors } from "@mui/material";
+import Login from "./Login";
 
 export default function Header() {
   const [openSubMenus, setOpenSubMenus] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
   const [selectedButton, setSelectedButton] = useState(0);
-
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const handleLoginButtonClick = () => {
+    setShowLoginForm(!showLoginForm);
+  };
   const handleButtonClick = (index) => {
     if (index === 1) {
       toggleSearchList();
       setSelectedButton(index);
-    } else {
+    }
+    else if (index === 3) {
+      handleLoginButtonClick();
+    }
+     else {
       setSelectedButton(index);
       setIsSearchListOpen(false);
     }
 
     // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
-
   };
 
   const toggleSearchList = () => {
@@ -383,7 +390,7 @@ export default function Header() {
                 <NotificationsNoneIcon className="notification-icon" />
               </div>
 
-              <div className="login" type="button">
+              <div className="login" type="button" onClick={handleLoginButtonClick}>
                 <PersonIcon className="login-icon" />
                 <div className="login-text">Đăng nhập/ Đăng kí</div>
               </div>
@@ -409,32 +416,50 @@ export default function Header() {
       </div>
 
       <div class="bottom-bar">
-        {( isSearchListOpen) && (
+        {isSearchListOpen && (
           <diV className="background-searchlist-bottom">
             <SearchList className="bottom-bar-search-list" />
           </diV>
         )}
         <div class="grid-container">
-        <div className={`grid-item ${selectedButton === 0 ? "selected" : ""}`} onClick={() => handleButtonClick(0)}>
+          <div
+            className={`grid-item ${selectedButton === 0 ? "selected" : ""}`}
+            onClick={() => handleButtonClick(0)}
+          >
             <HomeIcon className="icon-bottom-bar" />
-            <div className="text-icon-bottom-bar">
-              Trang chủ
-            </div>
+            <div className="text-icon-bottom-bar">Trang chủ</div>
           </div>
-          <div className={`grid-item ${selectedButton === 1 ? "selected" : ""}`} onClick={() => handleButtonClick(1)}>
+          <div
+            className={`grid-item ${selectedButton === 1 ? "selected" : ""}`}
+            onClick={() => handleButtonClick(1)}
+          >
             <SearchIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Tìm kiếm</div>
           </div>
-          <div className={`grid-item ${selectedButton === 2 ? "selected" : ""}`} onClick={() => handleButtonClick(2)}>
+          <div
+            className={`grid-item ${selectedButton === 2 ? "selected" : ""}`}
+            onClick={() => handleButtonClick(2)}
+          >
             <AccountBalanceWalletIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Nạp tiền</div>
           </div>
-          <div className={`grid-item ${selectedButton === 3 ? "selected" : ""}`} onClick={() => handleButtonClick(3)}>
+          <div
+            className={`grid-item ${selectedButton === 3 ? "selected" : ""}`}
+            onClick={() => handleButtonClick(3)}
+          >
             <AccountCircleIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Tài khoản</div>
           </div>
         </div>
       </div>
+      {showLoginForm && (
+        <div className="login-form-overlay">
+          <div className="login-form-container">
+            <ClearIcon onClick={handleLoginButtonClick} className="login-clear-icon"/>
+            <Login />
+          </div>
+        </div>
+      )}
     </>
   );
 }
