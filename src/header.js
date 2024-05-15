@@ -23,6 +23,20 @@ export default function Header() {
   const [openSubMenus, setOpenSubMenus] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
+  const [selectedButton, setSelectedButton] = useState(0);
+
+  const handleButtonClick = (index) => {
+    if (index === 1) {
+      toggleSearchList();
+      setSelectedButton(index);
+    } else {
+      setSelectedButton(index);
+      setIsSearchListOpen(false);
+    }
+
+    // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
+
+  };
 
   const toggleSearchList = () => {
     setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
@@ -401,21 +415,21 @@ export default function Header() {
           </diV>
         )}
         <div class="grid-container">
-          <div class="grid-item">
-            <HomeIcon className="icon-bottom-bar icon-color-bottom-bar" />
-            <div className="text-icon-bottom-bar icon-color-bottom-bar">
+        <div className={`grid-item ${selectedButton === 0 ? "selected" : ""}`} onClick={() => handleButtonClick(0)}>
+            <HomeIcon className="icon-bottom-bar" />
+            <div className="text-icon-bottom-bar">
               Trang chủ
             </div>
           </div>
-          <div class="grid-item" onClick={toggleSearchList}>
+          <div className={`grid-item ${selectedButton === 1 ? "selected" : ""}`} onClick={() => handleButtonClick(1)}>
             <SearchIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Tìm kiếm</div>
           </div>
-          <div class="grid-item">
+          <div className={`grid-item ${selectedButton === 2 ? "selected" : ""}`} onClick={() => handleButtonClick(2)}>
             <AccountBalanceWalletIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Nạp tiền</div>
           </div>
-          <div class="grid-item">
+          <div className={`grid-item ${selectedButton === 3 ? "selected" : ""}`} onClick={() => handleButtonClick(3)}>
             <AccountCircleIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Tài khoản</div>
           </div>

@@ -574,6 +574,9 @@ samp {
   top: 46px;
   overflow: auto;
 }
+.grid-item.selected {
+  color: #dc2626; /* Màu chữ khi được chọn */
+}
 
 .id-top-coin {
   font-weight: 600;
