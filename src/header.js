@@ -36,6 +36,7 @@ export default function Header() {
     }
     else if (index === 3) {
       handleLoginButtonClick();
+      setSelectedButton(index);
     }
      else {
       setSelectedButton(index);
