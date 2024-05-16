@@ -4,20 +4,17 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import SearchList from "./SearchList";
-import { Link } from "react-router-dom";
 import Body from "./Body";
 import BodyLQ from "./BodyLQ";
 import { Helmet } from "react-helmet";
 import BodyTopUp from "./BodyTopUp";
 import BodyTopUpBottom from "./BodyTopUpBottom";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Footer from "./Footer";
 import ClearIcon from "@mui/icons-material/Clear";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { colors } from "@mui/material";
 import Login from "./Login";
 
 export default function Header() {
@@ -26,19 +23,19 @@ export default function Header() {
   const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
   const [selectedButton, setSelectedButton] = useState(0);
   const [showLoginForm, setShowLoginForm] = useState(false);
+
   const handleLoginButtonClick = () => {
     setShowLoginForm(!showLoginForm);
   };
+
   const handleButtonClick = (index) => {
     if (index === 1) {
       toggleSearchList();
       setSelectedButton(index);
-    }
-    else if (index === 3) {
+    } else if (index === 3) {
       handleLoginButtonClick();
       setSelectedButton(index);
-    }
-     else {
+    } else {
       setSelectedButton(index);
       setIsSearchListOpen(false);
     }
@@ -90,7 +87,12 @@ export default function Header() {
     <>
       <Helmet>
         <title>Shop acc Duy Anh</title> {/* Thay đổi title */}
-        <link rel="icon" type="image/png" href="#" sizes="16x16" />{" "}
+        <link
+          rel="icon"
+          type="image/png"
+          href="../public/favicon.ico"
+          sizes="16x16"
+        />{" "}
         {/* Thay đổi favicon */}
       </Helmet>
 
@@ -374,10 +376,7 @@ export default function Header() {
               </div>
 
               <div className="header-logo">
-                <img
-                  src="https://sys.tmso1.co/images/image-5d36a956-a557-457a-97c2-f5eec632d41e.png"
-                  alt="logo"
-                />
+                <img src="https://i.imgur.com/uIYckQT.jpeg" alt="logo" />
               </div>
               {!isMobile && <SearchList />}
             </div>
@@ -391,7 +390,11 @@ export default function Header() {
                 <NotificationsNoneIcon className="notification-icon" />
               </div>
 
-              <div className="login" type="button" onClick={handleLoginButtonClick}>
+              <div
+                className="login"
+                type="button"
+                onClick={handleLoginButtonClick}
+              >
                 <PersonIcon className="login-icon" />
                 <div className="login-text">Đăng nhập/ Đăng kí</div>
               </div>
@@ -456,7 +459,10 @@ export default function Header() {
       {showLoginForm && (
         <div className="login-form-overlay">
           <div className="login-form-container">
-            <ClearIcon onClick={handleLoginButtonClick} className="login-clear-icon"/>
+            <ClearIcon
+              onClick={handleLoginButtonClick}
+              className="login-clear-icon"
+            />
             <Login />
           </div>
         </div>

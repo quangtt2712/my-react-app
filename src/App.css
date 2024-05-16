@@ -1109,6 +1109,7 @@ samp {
   border-radius: 5px;
   color: #fff;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .form-group{
   margin-top: 18px;
@@ -1132,6 +1133,7 @@ input:focus {
   color: #282c34;
   background-color: #fff;
   border: solid 1px #282c34;
+  cursor: pointer;
 }
 .btn.btn-primary {
   border: none;

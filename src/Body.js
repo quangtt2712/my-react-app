@@ -30,7 +30,7 @@ export default function Body() {
         ) : (
           <>
             <img
-              src="https://sys.tmso1.co/images/w7YkpCKrrhCU33Z.png"
+              src="https://lienquan.garena.vn/files/posts/341b96ef575a01182f0f52170c4b82866555cc7c928e4.png"
               alt="background"
               className="background-main"
             />

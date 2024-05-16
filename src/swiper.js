@@ -26,7 +26,7 @@ export default function Swipers() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="https://sys.tmso1.co/images/w7YkpCKrrhCU33Z.png"  alt="" className="img-swiper"/>
+          <img src="https://lienquan.garena.vn/files/posts/341b96ef575a01182f0f52170c4b82866555cc7c928e4.png"  alt="" className="img-swiper"/>
         </SwiperSlide>
         <SwiperSlide>
           <img src="https://sys.tmso1.co/images/3MWk1eA8gNDxBXt.jpeg" alt="" className="img-swiper"/>
