@@ -12,10 +12,12 @@ export default function Navbar() {
             <a href="#">Trang chủ</a>
           </li>
         </Link>
-
+        <Link to="/list-item">
         <li className="nav-bar-item">
           <a href="#">Tổng acc</a>
         </li>
+        </Link>
+
         <li className="nav-bar-item">
           <a href="#">Skin hot</a>
         </li>

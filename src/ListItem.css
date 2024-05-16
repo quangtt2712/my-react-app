@@ -1,11 +1,126 @@
 .title {
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #e45252;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #e45252;
 }
-.title-description{
-    font-weight: 700;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    color: #dc2626;
+.title-description {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #dc2626;
+}
+.list-item-background-filter {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.buttons-filter-list-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgb(172, 174, 177); /* Viền nét đứt ở phía dưới */
+}
+
+.select-filter-list-item {
+  width: 100%;
+  padding: 6px;
+  height: 100%;
+}
+
+.buttons-filter-list-item > *:first-child {
+  margin-left: 15px; /* Adjust the left margin as needed */
+}
+
+.buttons-filter-list-item > *:last-child {
+  margin-right: 15px; /* Adjust the right margin as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #dc2626;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.text-loc-tim-kiem {
+  padding: 10px 20px;
+}
+.filter-of-button {
+  margin-top: 10px;
+  display: flex;
+  padding-bottom: 10px;
+}
+.text-filter-of-button {
+  padding: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: #dc2626;
+  color: #fff;
+  border-radius: 8px;
+}
+.body-list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    1fr
+  ); /* Chia mỗi hàng thành 4 phần bằng nhau */
+  grid-gap: 10px; /* Khoảng cách giữa các item */
+}
+.body-list-item {
+  background-color: #fff;
+  padding: 10px;
+  height: 360px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  border-radius: 8px;
+}
+.body-list-item-img {
+  width: 100%;
+  border-radius: 8px;
+  height: 40%;
+}
+.price-item {
+  display: flex;
+  padding: 5px;
+  color: #dc2626;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+.number-char-item {
+  display: flex;
+}
+.infor-nick-item {
+  margin-top: 10px;
+  border-top: 1px dashed rgb(172, 174, 177); /* Viền nét đứt ở phía trên */
+  border-bottom: 1px dashed rgb(172, 174, 177);
+}
+.description-item {
+  margin-top: 10px;
+  display: flex;
+}
+.description-item-icon {
+  color: #dc2626;
+}
+.title-number-char-item {
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+.description-number-char-item {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+.description-text {
+  width: 100%;
+  height: 30px;
+  overflow: auto;
+  font-size: 1rem;
+}
+.description-text-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
