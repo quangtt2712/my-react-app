@@ -1,0 +1,11 @@
+.title {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #e45252;
+}
+.title-description{
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: #dc2626;
+}

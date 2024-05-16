@@ -1,13 +1,11 @@
+
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Navbar from "./Navbar";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchList from "./SearchList";
-import Body from "./Body";
 import { Link } from "react-router-dom";
-import BodyLQ from "./BodyLQ";
-import { Helmet } from "react-helmet";
 import BodyTopUp from "./BodyTopUp";
 import BodyTopUpBottom from "./BodyTopUpBottom";
 import Footer from "./Footer";
@@ -17,93 +15,74 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Login from "./Login";
-import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-
-export default function Header() {
-  const [openSubMenus, setOpenSubMenus] = useState({});
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
-  const [selectedButton, setSelectedButton] = useState(0);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-
-  const handleLoginButtonClick = () => {
-    setShowLoginForm(!showLoginForm);
-  };
-
-  const handleButtonClick = (index) => {
-    if (index === 1) {
-      toggleSearchList();
-      setSelectedButton(index);
-    } else if (index === 3) {
-      handleLoginButtonClick();
-      setSelectedButton(index);
-    } else {
-      setSelectedButton(index);
-      setIsSearchListOpen(false);
-    }
-
-    // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
-  };
-
-  const toggleSearchList = () => {
-    setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
-  };
-
-  const toggleSubMenu = (index) => {
-    setOpenSubMenus((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
+export default function FormWeb({ children }) {
+    const [openSubMenus, setOpenSubMenus] = useState({});
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
+    const [selectedButton, setSelectedButton] = useState(0);
+    const [showLoginForm, setShowLoginForm] = useState(false);
+  
+    const handleLoginButtonClick = () => {
+      setShowLoginForm(!showLoginForm);
+    };
+  
+    const handleButtonClick = (index) => {
+      if (index === 1) {
+        toggleSearchList();
+        setSelectedButton(index);
+      } else if (index === 3) {
+        handleLoginButtonClick();
+        setSelectedButton(index);
       } else {
-        setScrolled(false);
+        setSelectedButton(index);
+        setIsSearchListOpen(false);
       }
+  
+      // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
     };
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
+  
+    const toggleSearchList = () => {
+      setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
     };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+  
+    const toggleSubMenu = (index) => {
+      setOpenSubMenus((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index],
+      }));
     };
-  }, []);
-
-  return (
-    <>
-      <Helmet>
-        <title>Shop acc Duy Anh</title> {/* Thay đổi title */}
-        <link
-          rel="icon"
-          type="image/png"
-          href="../public/favicon.ico"
-          sizes="16x16"
-        />{" "}
-        {/* Thay đổi favicon */}
-      </Helmet>
-
-      <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
+  
+    const closeMenu = () => {
+      setIsMenuOpen(false);
+    };
+    const [scrolled, setScrolled] = useState(false);
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      };
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+    return (
+       <>
+       <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
         <div className="container-main">
           <header className="header">
             <div className="logo-and-search">
@@ -415,8 +394,7 @@ export default function Header() {
         </div>
       </div>
       <div className="display-body">
-        <Body />
-        <BodyLQ />
+      {children}
       </div>
       <div className="header-body-top-up">
         <BodyTopUp />
@@ -476,6 +454,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </>
-  );
+       </>
+    )
 }

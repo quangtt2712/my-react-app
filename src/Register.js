@@ -20,8 +20,9 @@ const Register = ({ onLoginClick }) => {
           <h2 className="text-login">ĐĂNG KÝ TÀI KHOẢN</h2>
           <div className="header-logo">
             <img
-              src="https://sys.tmso1.co/images/image-5d36a956-a557-457a-97c2-f5eec632d41e.png"
+              src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04"
               alt="logo"
+              className="logo-login"
             />
           </div>
           <div className="form-group">

@@ -1,14 +1,18 @@
 import "./App.css";
 import React, { useState } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <div className="nav-bar-main">
       <ul className="nav-bar">
-        <li className="nav-bar-item">
-          <a href="#">Trang chủ</a>
-        </li>
+        <Link to="/">
+          <li className="nav-bar-item">
+            <a href="#">Trang chủ</a>
+          </li>
+        </Link>
+
         <li className="nav-bar-item">
           <a href="#">Tổng acc</a>
         </li>
@@ -134,7 +138,7 @@ export default function Navbar() {
                 <div>Thách Đấu</div>
                 <ChevronRightIcon className="icon-mui-ten-ben-phai" />
               </a>
-    
+
               <ul className="nav-bar-item-thach-dau">
                 <li className="nav-bar-item-sub-thach-dau">
                   <a href="#" className="">
