@@ -5,6 +5,22 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
+function Select({value, onChange, options }) {
+
+
+  return (
+    <div className="custom-select">
+      <select value={value} onChange={onChange}>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
 const ListItem = () => {
   const [searchInput, setSearchInput] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
@@ -288,6 +304,23 @@ const ListItem = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+  const priceOptions = [
+    { value: "all", label: "Tất cả" },
+    { value: "", label: "Dưới 100.000đ" },
+    { value: "100-300", label: "100.000đ đến 300.000đ" },
+    { value: "300-500", label: "300.000đ đến 500.000đ" },
+    { value: "500-1000", label: "500.000đ đến 1.000.000đ" },
+    // Add more options as needed
+  ];
+
+  const materialOptions = [
+    { value: "all", label: "Tất cả" },
+    { value: "", label: "Chưa có" },
+    { value: "iron", label: "Sắt" },
+    { value: "copper", label: "Đồng" },
+    { value: "silver", label: "Bạc" },
+    // Add more options as needed
+  ];
 
   return (
     <>
@@ -305,36 +338,17 @@ const ListItem = () => {
                 onChange={handleInputChange}
                 placeholder="Nhập id nick..."
               />
-              <div>
-                <select
-                  className="select-filter-list-item"
-                  value={priceFilter}
-                  onChange={handlePriceFilterChange}
-                >
-                  <option value="all">Tất cả</option>
-                  <option value="">Dưới 100.000đ</option>
-                  <option value="100-300">100.000đ đến 300.000đ</option>
-                  <option value="300-500">300.000đ đến 500.000đ</option>
-                  <option value="500-1000">500.000đ đến 1.000.000đ</option>
-                  <option value="300-500">300.000đ đến 500.000đ</option>
-                  <option value="500-1000">500.000đ đến 1.000.000đ</option>
-                </select>
-              </div>
-              <div>
-                <select
-                  className="select-filter-list-item"
-                  value={materialFilter}
-                  onChange={handleMaterialFilterChange}
-                >
-                  <option value="all">Tất cả</option>
-                  <option value="">Chưa có</option>
-                  <option value="iron">Sắt</option>
-                  <option value="copper">Đồng</option>
-                  <option value="silver">Bạc</option>
-                  <option value="copper">Đồng</option>
-                  <option value="silver">Bạc</option>
-                </select>
-              </div>
+              <Select
+                value={priceFilter}
+                onChange={handlePriceFilterChange}
+                options={priceOptions}
+              />
+              <Select
+                label="Chất liệu"
+                value={materialFilter}
+                onChange={handleMaterialFilterChange}
+                options={materialOptions}
+              />
               <div>Áp dụng</div>
             </div>
             <div className="filter-of-button">

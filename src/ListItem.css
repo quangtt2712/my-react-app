@@ -30,7 +30,16 @@
 
 .buttons-filter-list-item > *:first-child {
   margin-left: 15px; /* Adjust the left margin as needed */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+
 }
+
+.buttons-filter-list-item > *:first-child:focus {
+  outline: none; /* Loại bỏ viền màu khi chọn */
+  border-color: #dc2626; /* Màu viền khi chọn */
+}
+
 
 .buttons-filter-list-item > *:last-child {
   margin-right: 15px; /* Adjust the right margin as needed */
@@ -218,7 +227,52 @@
 }
 input {
   text-indent: 5px; /* Di chuyển chữ về phía bên phải 5px */
+
 }
 input:focus {
-  outline: 1px solid red; /* Hiển thị viền đỏ khi ô input được focus */
+  outline: #dc2626; /* Loại bỏ viền màu khi chọn */
+  
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Điều chỉnh kích thước cho phù hợp */
+}
+
+.custom-select select + div:before {
+  content: "\25BC"; /* Unicode của mũi tên */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.custom-select select + div:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #000; /* Màu sắc của mũi tên */
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.custom-select select {
+  background-color: transparent;
+  padding: 6px;
+  font-size: 16px; /* Kích thước chữ */
+  border: 1px solid #ccc; /* Màu viền */
+  border-radius: 5px; /* Độ cong viền */
+  width: 100%;
+}
+
+.custom-select select:focus {
+  outline: none; /* Loại bỏ viền màu khi chọn */
+  border-color: #dc2626; /* Màu viền khi chọn */
 }
