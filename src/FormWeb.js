@@ -101,9 +101,11 @@ export default function FormWeb({ children }) {
                 <div className={`nav-mobile ${isMenuOpen ? "open" : ""}`}>
                   <ClearIcon className="icon-clear" onClick={closeMenu} />
                   <ul className="nav-bar-mobile">
+                  <Link to="/">
                     <li className="nav-bar-item-mobile">
                       <a href="#">Trang chủ</a>
                     </li>
+                    </Link>
                     <li className="nav-bar-item-mobile">
                       <a href="#">Tổng acc</a>
                     </li>

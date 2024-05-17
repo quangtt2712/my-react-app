@@ -1,35 +1,37 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import Navbar from "./Navbar";
-import { useEffect, useState } from "react";
-import SearchList from "./SearchList";
-import Body from "./Body";
-import { Link } from "react-router-dom";
-import BodyLQ from "./BodyLQ";
-import { Helmet } from "react-helmet";
-import BodyTopUp from "./BodyTopUp";
-import BodyTopUpBottom from "./BodyTopUpBottom";
-import Footer from "./Footer";
 import ClearIcon from "@mui/icons-material/Clear";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+
+import Navbar from "./Navbar";
+import SearchList from "./SearchList";
+import Body from "./Body";
+import BodyLQ from "./BodyLQ";
+import BodyTopUp from "./BodyTopUp";
+import BodyTopUpBottom from "./BodyTopUpBottom";
+import Footer from "./Footer";
 import Login from "./Login";
-import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 export default function Header() {
   const [openSubMenus, setOpenSubMenus] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
+  const [isSearchListOpen, setIsSearchListOpen] = useState(false);
   const [selectedButton, setSelectedButton] = useState(0);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleLoginButtonClick = () => {
     setShowLoginForm(!showLoginForm);
@@ -38,20 +40,16 @@ export default function Header() {
   const handleButtonClick = (index) => {
     if (index === 1) {
       toggleSearchList();
-      setSelectedButton(index);
     } else if (index === 3) {
       handleLoginButtonClick();
-      setSelectedButton(index);
     } else {
-      setSelectedButton(index);
       setIsSearchListOpen(false);
     }
-
-    // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
+    setSelectedButton(index);
   };
 
   const toggleSearchList = () => {
-    setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
+    setIsSearchListOpen(!isSearchListOpen);
   };
 
   const toggleSubMenu = (index) => {
@@ -60,7 +58,6 @@ export default function Header() {
       [index]: !prevState[index],
     }));
   };
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -69,17 +66,14 @@ export default function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 0);
     };
+
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
+      setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -93,23 +87,22 @@ export default function Header() {
   return (
     <>
       <Helmet>
-        <title>Shop acc Duy Anh</title> {/* Thay đổi title */}
+        <title>Shop acc Duy Anh</title>
         <link
           rel="icon"
           type="image/png"
           href="../public/favicon.ico"
           sizes="16x16"
-        />{" "}
-        {/* Thay đổi favicon */}
+        />
       </Helmet>
 
       <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
         <div className="container-main">
           <header className="header">
             <div className="logo-and-search">
-              <div className="toogle-display-menu">
+              <div className="toggle-display-menu">
                 <div
-                  class="menu-toggle"
+                  className="menu-toggle"
                   onClick={toggleMenu}
                   role="button"
                   tabIndex={0}
@@ -122,12 +115,17 @@ export default function Header() {
                 <div className={`nav-mobile ${isMenuOpen ? "open" : ""}`}>
                   <ClearIcon className="icon-clear" onClick={closeMenu} />
                   <ul className="nav-bar-mobile">
-                    <li className="nav-bar-item-mobile">
-                      <a href="#">Trang chủ</a>
-                    </li>
-                    <li className="nav-bar-item-mobile">
-                      <a href="#">Tổng acc</a>
-                    </li>
+                    <Link to="/">
+                      <li className="nav-bar-item-mobile">
+                        <a href="#">Trang chủ</a>
+                      </li>
+                    </Link>
+                    <Link to="list-item">
+                      <li className="nav-bar-item-mobile">
+                        <a href="#">Tổng acc</a>
+                      </li>
+                    </Link>
+
                     <li className="nav-bar-item-mobile">
                       <a href="#">Skin hot</a>
                     </li>
@@ -383,10 +381,12 @@ export default function Header() {
               </div>
               <Link to="/">
                 <div className="header-logo">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04" alt="logo" />
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04"
+                    alt="logo"
+                  />
                 </div>
               </Link>
-
               {!isMobile && <SearchList />}
             </div>
             <div className="user-controls">
@@ -394,11 +394,9 @@ export default function Header() {
                 <MonetizationOnIcon className="icon-top-up" />
                 <div className="top-up">Nạp tiền</div>
               </div>
-
               <div className="notification" type="button">
                 <NotificationsNoneIcon className="notification-icon" />
               </div>
-
               <div
                 className="login"
                 type="button"
@@ -410,8 +408,6 @@ export default function Header() {
             </div>
           </header>
           <Navbar />
-
-          {/* <Link to="/swiper">Login</Link> */}
         </div>
       </div>
       <div className="display-body">
@@ -428,13 +424,13 @@ export default function Header() {
         <Footer />
       </div>
 
-      <div class="bottom-bar">
+      <div className="bottom-bar">
         {isSearchListOpen && (
-          <diV className="background-searchlist-bottom">
+          <div className="background-searchlist-bottom">
             <SearchList className="bottom-bar-search-list" />
-          </diV>
+          </div>
         )}
-        <div class="grid-container">
+        <div className="grid-container">
           <div
             className={`grid-item ${selectedButton === 0 ? "selected" : ""}`}
             onClick={() => handleButtonClick(0)}
