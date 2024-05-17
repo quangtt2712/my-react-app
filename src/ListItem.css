@@ -165,3 +165,60 @@
   border: 1px solid #dc2626;
   border-radius: 5px;
 }
+
+@media (max-width: 480px) {
+  .buttons-filter-list-item {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 10px;
+  }
+  .buttons-filter-list-item > *:first-child {
+    margin-left: 0;
+    border: 1px solid rgb(226, 232, 240);
+    padding: 6px;
+    border-radius: 8px;
+  }
+  .buttons-filter-list-item > *:last-child {
+    margin-right: 0;
+    padding: 7px;
+  }
+  .list-item-background-filter {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .background-body {
+    width: 96%;
+    margin: 0 auto;
+  }
+  .text-loc-tim-kiem {
+    padding: 10px 10px;
+  }
+  .select-filter-list-item {
+    border: 1px solid rgb(226, 232, 240);
+    border-radius: 8px;
+  }
+  .select option {
+    border-radius: 8px; /* Bo tròn viền của các option thành hình vuông */
+    border: 1px solid black; /* Tạo viền bo vuông với độ dày là 1px và màu sắc là đen */
+  }
+  .body-list{
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+  .select-filter-list-item {
+    width: 100%; /* Đảm bảo rằng phần tử select có chiều rộng tối đa */
+    max-height: 150px; /* Đặt chiều cao tối đa cho phần tử select */
+    overflow-y: auto; /* Hiển thị thanh cuộn khi cần */
+  }
+  .pagination {
+    width: 90%;
+    margin: 0 auto;
+    bottom: 69px;
+   
+}
+}
+input {
+  text-indent: 5px; /* Di chuyển chữ về phía bên phải 5px */
+}
+input:focus {
+  outline: 1px solid red; /* Hiển thị viền đỏ khi ô input được focus */
+}

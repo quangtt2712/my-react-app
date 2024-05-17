@@ -292,7 +292,7 @@ const ListItem = () => {
   return (
     <>
       <FormWeb>
-        <div>
+        <div className="background-body">
           <h1 className="title">Danh sách các nick Li Qi</h1>
           <p>DANH MỤC</p>
           <div className="title-description">NICK LIÊN QUÂN SALE</div>
@@ -316,6 +316,8 @@ const ListItem = () => {
                   <option value="100-300">100.000đ đến 300.000đ</option>
                   <option value="300-500">300.000đ đến 500.000đ</option>
                   <option value="500-1000">500.000đ đến 1.000.000đ</option>
+                  <option value="300-500">300.000đ đến 500.000đ</option>
+                  <option value="500-1000">500.000đ đến 1.000.000đ</option>
                 </select>
               </div>
               <div>
@@ -327,6 +329,8 @@ const ListItem = () => {
                   <option value="all">Tất cả</option>
                   <option value="">Chưa có</option>
                   <option value="iron">Sắt</option>
+                  <option value="copper">Đồng</option>
+                  <option value="silver">Bạc</option>
                   <option value="copper">Đồng</option>
                   <option value="silver">Bạc</option>
                 </select>
