@@ -1,23 +1,185 @@
-.background {
-    /* CSS cho phần nền */
-    background-color: #fff;
-    height: 500px;
+.background-body-item-detail {
+    background-color: #fff; /* Light grey background */
+    width: 100%;
+    padding: 20px 10px; /* Add some padding to the top and bottom */
 }
 
-.body {
+.body-item-detail {
     display: grid;
     grid-template-columns: repeat(12, 1fr); /* Chia grid thành 12 cột */
     gap: 10px; /* Khoảng cách giữa các cột */
+    height: auto; /* Let the height adjust based on content */
 }
 
 .five-cols {
-    grid-column: span 5; /* Phần tử chiếm 5 cột */
-    height: 300px;
-    background-color: aqua;
+    grid-column: span 5; /* Element spans 5 columns */
+    height: auto; /* Adjust height based on content */
+    background-color: #e0f7fa; /* Light cyan background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Hide overflow */
 }
 
 .seven-cols {
-    grid-column: span 7; /* Phần tử chiếm 7 cột */
-    height: 300px;
-    background-color: aquamarine;
+    height: auto; /* Adjust height based on content */
+    background-color: #29b7ca; /* Light cyan background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow */
 }
+.img-swiper-item-detail {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; 
+    object-fit: cover;
+  }
+  /* CSS cho Modal */
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 90%;
+    max-height: 90%;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+  }
+  
+  .modal-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff5e5e;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background: #ff1c1c;
+  }
+/* CSS cho các nút chuyển ảnh của Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff; /* Màu trắng cho các nút */
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền bán trong suốt */
+  padding: 10px; /* Khoảng cách bên trong nút */
+  border-radius: 50%; /* Nút hình tròn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển động */
+  width: 40px; /* Chiều rộng nút */
+  height: 40px; /* Chiều cao nút */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Màu nền khi hover */
+  transform: scale(1.1); /* Tăng kích thước khi hover */
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px; /* Kích thước biểu tượng */
+}
+
+/* Điều chỉnh vị trí nút nếu cần */
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền */
+  color: white; /* Màu chữ */
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu */
+  color: #ffffff; /* Màu trắng cho các nút */
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền bán trong suốt */
+  padding: 10px; /* Khoảng cách bên trong nút */
+  border-radius: 50%; /* Nút hình tròn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển động */
+  width: 40px; /* Chiều rộng nút */
+  height: 40px; /* Chiều cao nút */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Màu nền khi hover */
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+.slide-container {
+    position: relative;
+  }
+  
+  .zoom-message {
+    position: absolute;
+    bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
+    right: 10px; /* Điều chỉnh vị trí bên phải */
+    background-color: #ff1c1cc5; /* Màu nền */
+    color: #e0f7fa;
+    padding: 5px 10px; /* Khoảng cách lề */
+    border-radius: 5px; /* Góc bo tròn */
+    font-size: 12px; /* Kích thước chữ */
+  }
+  .image-count {
+    position: absolute;
+    bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
+    left: 10px; /* Điều chỉnh vị trí bên trái */
+    color: white; /* Màu chữ */
+    font-size: 12px; /* Kích thước chữ */
+    background-color: rgba(99, 240, 56, 0.7); /* Màu nền */
+    padding: 5px 10px; /* Khoảng cách lề */
+    border-radius: 5px; /* Góc bo tròn */
+  }
+  

@@ -360,7 +360,7 @@ const ListItem = () => {
           </div>
           <div className="body-list">
             {displayedItems.map((item) => (
-              <Link to="" key={item.id}>
+              <Link to="/item-detail" key={item.id}>
                 <div className="body-list-item">
                   <img
                     src="https://sys.tmso1.co/images/s3ph895jqSpcrj9.png"
