@@ -1,0 +1,23 @@
+.background {
+    /* CSS cho phần nền */
+    background-color: #fff;
+    height: 500px;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Chia grid thành 12 cột */
+    gap: 10px; /* Khoảng cách giữa các cột */
+}
+
+.five-cols {
+    grid-column: span 5; /* Phần tử chiếm 5 cột */
+    height: 300px;
+    background-color: aqua;
+}
+
+.seven-cols {
+    grid-column: span 7; /* Phần tử chiếm 7 cột */
+    height: 300px;
+    background-color: aquamarine;
+}
