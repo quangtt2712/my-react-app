@@ -1156,3 +1156,8 @@ input:focus {
   right: 10px; /* Điều chỉnh giá trị tùy theo vị trí mong muốn */
   cursor: pointer;
 }
+.toggle-display-menu {
+  display: flex;
+  align-items: center;
+
+}
