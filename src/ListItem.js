@@ -5,9 +5,7 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
-function Select({value, onChange, options }) {
-
-
+function Select({ value, onChange, options }) {
   return (
     <div className="custom-select">
       <select value={value} onChange={onChange}>
@@ -269,9 +267,12 @@ const ListItem = () => {
     });
   };
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+  const handlePageChange = (value) => {
+    if (value === '' || isNaN(value)) {
+      setCurrentPage('');
+    } else {
+      const pageNumber = Math.max(1, Math.min(totalPages, Number(value)));
+      setCurrentPage(pageNumber);
     }
   };
 
@@ -293,7 +294,7 @@ const ListItem = () => {
       <input
         type="number"
         value={currentPage}
-        onChange={(e) => handlePageChange(Number(e.target.value))}
+        onChange={(e) => handlePageChange((e.target.value))}
         min={1}
         max={totalPages}
       />
