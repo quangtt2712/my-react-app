@@ -283,4 +283,11 @@
   .text-background-information-item-detail {
     width: 35%;
   }
+  .five-cols,
+  .seven-cols {
+    grid-column: span 12; /* Mỗi phần tử sẽ chiếm toàn bộ chiều rộng */
+    padding-left: 0; /* Loại bỏ padding bên trái cho phần tử .seven-cols */
+    padding-right: 0; /* Thêm padding bên phải nếu cần */
+    margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
+  }
 }

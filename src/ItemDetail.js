@@ -72,7 +72,7 @@ function Swipers({ imageUrls }) {
     <>
       <Swiper
         slidesPerView={1}
-        spaceBetween={30}
+        spaceBetween={0}
         loop={true}
         autoplay={{
           delay: 3000,
