@@ -1,91 +1,82 @@
 .background-body-item-detail {
-    background-color: #fff; /* Light grey background */
-    width: 100%;
-    padding: 20px 10px; /* Add some padding to the top and bottom */
+  background-color: #fff; /* Light grey background */
+  width: 100%;
+  padding: 20px 10px; /* Add some padding to the top and bottom */
+  border-radius: 10px;
 }
 
 .body-item-detail {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); /* Chia grid thành 12 cột */
-    gap: 10px; /* Khoảng cách giữa các cột */
-    height: auto; /* Let the height adjust based on content */
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* Chia grid thành 12 cột */
+  gap: 10px; /* Khoảng cách giữa các cột */
+  height: 551px; /* Let the height adjust based on content */
 }
 
 .five-cols {
-    grid-column: span 5; /* Element spans 5 columns */
-    height: auto; /* Adjust height based on content */
-    background-color: #e0f7fa; /* Light cyan background */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    overflow: hidden; /* Hide overflow */
+  height: 100%;
+  position: relative;
+  grid-column: span 5; /* Element spans 5 columns */
+  border-radius: 10px; /* Rounded corners */
 }
 
 .seven-cols {
-    height: auto; /* Adjust height based on content */
-    background-color: #29b7ca; /* Light cyan background */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Hide overflow */
+  grid-column: span 7;
+  padding-left: 10px;
 }
 .img-swiper-item-detail {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px; 
-    object-fit: cover;
-  }
-  /* CSS cho Modal */
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+/* CSS cho Modal */
 .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    max-width: 90%;
-    max-height: 90%;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 999;
-  }
-  
-  .modal-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff5e5e;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .close-button:hover {
-    background: #ff1c1c;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff5e5e;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: #ff1c1c;
+}
 /* CSS cho các nút chuyển ảnh của Swiper */
 .swiper-button-next,
 .swiper-button-prev {
@@ -148,7 +139,7 @@
 
 .prev-button:hover,
 .next-button:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Màu nền khi hover */
+  background-color: rgba(0, 0, 0, 0.7); /* Màu nền khi hover */
 }
 
 .prev-button {
@@ -159,27 +150,137 @@
   right: 10px;
 }
 .slide-container {
-    position: relative;
+  position: relative;
+}
+
+.zoom-message {
+  position: absolute;
+  z-index: 1;
+  bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
+  right: 10px; /* Điều chỉnh vị trí bên phải */
+  background-color: #ff1c1cc5; /* Màu nền */
+  color: #e0f7fa;
+  padding: 5px 10px; /* Khoảng cách lề */
+  border-radius: 5px; /* Góc bo tròn */
+  font-size: 12px; /* Kích thước chữ */
+}
+.image-count {
+  position: absolute;
+  bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
+  left: 10px; /* Điều chỉnh vị trí bên trái */
+  color: white; /* Màu chữ */
+  font-size: 12px; /* Kích thước chữ */
+  background-color: rgba(99, 240, 56, 0.7); /* Màu nền */
+  padding: 5px 10px; /* Khoảng cách lề */
+  border-radius: 5px; /* Góc bo tròn */
+}
+.id-nick-game {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.description-id-nick-game {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 10px 0;
+}
+.card-item-detail {
+  display: flex;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.text-price-item-detail {
+  width: 70%;
+  background: linear-gradient(135deg, #f43bb6, #1ee0e0);
+  border-radius: 10px;
+  display: flex; /* Sử dụng flexbox */
+  flex-direction: column; /* Hiển thị nội dung theo chiều dọc */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #fff;
+  line-height: 2rem;
+}
+.text-atm-momo {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.background-text-atm-momo {
+  display: flex;
+  align-items: center;
+}
+.add-to-card-item-detail {
+  width: 30%;
+  display: flex; /* Sử dụng flexbox */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.icon-add-to-card-item-detail {
+  transform: scale(1.5);
+}
+.information-item-detail {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+  height: auto;
+}
+.background-information-item-detail {
+  display: flex;
+  margin-top: 5px;
+}
+.text-background-information-item-detail {
+  width: 25%;
+  padding: 5px 12px;
+  background-color: #f5f5f5;
+  font-weight: 500;
+  color: #000000;
+  margin-right: 10px;
+}
+.description-background-information-item-detail {
+  padding: 5px 12px;
+  width: 65%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.background-button-buy {
+  margin-top: 10px;
+  width: 45%;
+  height: 46px;
+  background-color: #ff1c1c;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.content-background-button-buy {
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.text-content-background-button-buy {
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: larger;
+}
+@media (max-width: 480px) {
+  .body-item-detail {
+    grid-template-columns: 1fr;
+    height: auto;
   }
-  
-  .zoom-message {
-    position: absolute;
-    bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
-    right: 10px; /* Điều chỉnh vị trí bên phải */
-    background-color: #ff1c1cc5; /* Màu nền */
-    color: #e0f7fa;
-    padding: 5px 10px; /* Khoảng cách lề */
-    border-radius: 5px; /* Góc bo tròn */
-    font-size: 12px; /* Kích thước chữ */
+  .card-item-detail{
+
   }
-  .image-count {
-    position: absolute;
-    bottom: 10px; /* Điều chỉnh vị trí dưới cùng */
-    left: 10px; /* Điều chỉnh vị trí bên trái */
-    color: white; /* Màu chữ */
-    font-size: 12px; /* Kích thước chữ */
-    background-color: rgba(99, 240, 56, 0.7); /* Màu nền */
-    padding: 5px 10px; /* Khoảng cách lề */
-    border-radius: 5px; /* Góc bo tròn */
+  .background-button-buy{
+    width: 100%;
   }
-  
+  .description-background-information-item-detail {
+    width: 65%;
+  }
+  .text-background-information-item-detail {
+    width: 35%;
+  }
+}
