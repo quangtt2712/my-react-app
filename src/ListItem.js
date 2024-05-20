@@ -268,22 +268,20 @@ const ListItem = () => {
   };
 
   const handlePageChange = (value) => {
-    if (value === '' || isNaN(value)) {
-      setCurrentPage('');
+    if (value === "" || isNaN(value)) {
+      setCurrentPage("");
     } else {
       const pageNumber = Math.max(1, Math.min(totalPages, Number(value)));
       setCurrentPage(pageNumber);
-          localStorage.setItem('currentPage', pageNumber); // Lưu trạng thái trang vào local storage
-
+      localStorage.setItem("currentPage", pageNumber); // Lưu trạng thái trang vào local storage
     }
   };
   React.useEffect(() => {
-    const savedPage = localStorage.getItem('currentPage');
+    const savedPage = localStorage.getItem("currentPage");
     if (savedPage) {
       setCurrentPage(Number(savedPage));
     }
   }, []);
-  
 
   const renderPagination = () => (
     <div className="pagination">
@@ -303,7 +301,7 @@ const ListItem = () => {
       <input
         type="number"
         value={currentPage}
-        onChange={(e) => handlePageChange((e.target.value))}
+        onChange={(e) => handlePageChange(e.target.value)}
         min={1}
         max={totalPages}
       />
@@ -377,9 +375,24 @@ const ListItem = () => {
                     alt=""
                     className="body-list-item-img"
                   ></img>
-                  <div className="price-item">
-                    <div>{formatAmount(item.price)}</div>
+                  <div className="id-and-sale-price-item">
+                    <div>
+                      <div className="flex-sale-price-item">
+                        <div className="sale-price-item">
+                          {formatAmount(item.price)}
+                        </div>
+                        <span>-50%</span>
+                      </div>
+
+                      <div className="price-item">
+                        {formatAmount(item.price)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="id-item">ID 12345</div>
+                    </div>
                   </div>
+
                   <div className="infor-nick-item">
                     <div className="number-char-item">
                       <div className="title-number-char-item">Tướng:</div>
@@ -408,15 +421,14 @@ const ListItem = () => {
                         {item.winRate}{" "}
                       </div>
                     </div>
+                    <div className="number-char-item">
+                      <div className="title-number-char-item">Ngọc: </div>
+                      <div className="description-number-char-item"> 90</div>
+                    </div>
                   </div>
                   <div>
                     <div className="description-item">
-                      <LocalFireDepartmentIcon className="description-item-icon" />
-                      <div className="description-text-container">
-                        <div className="description-text">
-                          {item.description}
-                        </div>
-                      </div>
+                      <div>XEM CHI TIẾT</div>
                     </div>
                   </div>
                 </div>
