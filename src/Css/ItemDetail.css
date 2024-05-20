@@ -9,14 +9,15 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr); /* Chia grid thành 12 cột */
   gap: 10px; /* Khoảng cách giữa các cột */
-  height: 551px; /* Let the height adjust based on content */
+  height: auto; /* Let the height adjust based on content */
 }
 
 .five-cols {
-  height: 100%;
+  height: auto;
   position: relative;
   grid-column: span 5; /* Element spans 5 columns */
   border-radius: 10px; /* Rounded corners */
+  text-align: center;
 }
 
 .seven-cols {
@@ -182,7 +183,8 @@
 .description-id-nick-game {
   font-size: 0.875rem;
   line-height: 1.25rem;
-  margin: 10px 0;
+  color: rgb(254, 226, 226);
+  text-transform: uppercase;
 }
 .card-item-detail {
   display: flex;
@@ -191,21 +193,24 @@
   margin-bottom: 10px;
 }
 .text-price-item-detail {
-  width: 70%;
-  background: linear-gradient(135deg, #f43bb6, #1ee0e0);
-  border-radius: 10px;
+padding: 10px;
+  background-color: #FEE2E2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex; /* Sử dụng flexbox */
-  flex-direction: column; /* Hiển thị nội dung theo chiều dọc */
   align-items: center; /* Căn giữa theo chiều ngang */
-  justify-content: center;
+  justify-content: space-around;
   font-weight: 800;
   font-size: 1.75rem;
-  color: #fff;
+  color: rgb(220, 38, 38);
   line-height: 2rem;
 }
 .text-atm-momo {
   font-weight: 600;
   font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .background-text-atm-momo {
   display: flex;
@@ -223,34 +228,35 @@
   transform: scale(1.5);
 }
 .information-item-detail {
-  margin-top: 20px;
   width: 100%;
-  height: 100px;
-  border-radius: 10px;
+  border-bottom-left-radius:  10px;
+  border-bottom-right-radius: 10px;
   height: auto;
+  border: solid 1px rgb(229, 229, 229);
 }
 .background-information-item-detail {
   display: flex;
-  margin-top: 5px;
+  border-bottom: solid 1px rgb(229, 229, 229);
+}
+.background-information-item-detail:last-child {
+  border: none;
 }
 .text-background-information-item-detail {
   width: 25%;
+  display: flex;
   padding: 5px 12px;
-  background-color: #f5f5f5;
-  font-weight: 500;
   color: #000000;
-  margin-right: 10px;
 }
 .description-background-information-item-detail {
   padding: 5px 12px;
-  width: 65%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 75%;
+  font-weight: bolder;
 }
 .background-button-buy {
   margin-top: 10px;
-  width: 45%;
+  width: 100%;
   height: 46px;
-  background-color: #ff1c1c;
+  background-color: #B91C1C;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -265,6 +271,9 @@
   margin-left: 10px;
   font-weight: 500;
   font-size: larger;
+}
+.small-text{
+  font-size: small;
 }
 @media (max-width: 480px) {
   .body-item-detail {
@@ -290,4 +299,46 @@
     padding-right: 0; /* Thêm padding bên phải nếu cần */
     margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
   }
+  .text-price-item-detail{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .sale-buy-price{
+    font-size: 13px !important;
+  }
+.text-atm-momo{
+  font-weight: 700;
+}
+.backgground-text-atm-momo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+}
+
+.background-id-nick-game {
+  background-color: #B91C1C;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.id-nick-game {
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  
+}
+.sale-buy-price {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: rgba(220, 38, 38, 0.5);;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.sale-buy-price > span {
+  text-decoration-line: line-through;
 }

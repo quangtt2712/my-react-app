@@ -11,7 +11,8 @@ import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 Modal.setAppElement("#root");
 
 function Swipers({ imageUrls }) {
@@ -127,6 +128,9 @@ const formatAmount = (amount) => {
     currency: "VND",
   });
 };
+const calculateOriginalPrice = (salePrice) => {
+  return salePrice * 1.1; // Giá gốc cao hơn 10% so với giá bán
+};
 
 const ItemDetail = () => {
   const imageUrls = [
@@ -145,33 +149,55 @@ const ItemDetail = () => {
             <div className="five-cols-body">
               <Swipers imageUrls={imageUrls} />
             </div>
+            <div>🔥 Ưu tiên khi nạp qua ATM/MOMO sẽ đc lời 50% hơn thẻ cào </div>
           </div>
           <div className="seven-cols">
+            <div className="background-id-nick-game">
             <div className="id-nick-game">Mã số: 1303704</div>
             <p className="description-id-nick-game">
               nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần
               long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
+              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
             </p>
-            <div className="card-item-detail">
-              <div className="text-price-item-detail">
+            </div>
+
+            <div className="text-price-item-detail">
+              <div className="backgground-text-atm-momo">
+                <div className="text-atm-momo">
+                  <div className="background-text-atm-momo">
+                    <div> Thẻ cào</div>
+                    <LocalFireDepartmentIcon />
+
+                  </div>
+                </div>
+                <div>{formatAmount(22728000)}</div>
+                <div className="sale-buy-price">Giá gốc: &nbsp;<span> {formatAmount(calculateOriginalPrice(22728000))}</span></div>
+              </div>
+              <div className="small-text">hoặc</div>
+              <div className="backgground-text-atm-momo">
                 <div className="text-atm-momo">
                   <div className="background-text-atm-momo">
                     <div> ATM, MOMO</div>
                     <LocalFireDepartmentIcon />
                   </div>
                 </div>
-                <div>{formatAmount(2728000)}</div>
-              </div>
-              <div className="add-to-card-item-detail">
-                <AddShoppingCartIcon className="icon-add-to-card-item-detail" />
-                <div>Thêm vào giỏ</div>
+                <div>{formatAmount(33728000)}</div>
+                <div className="sale-buy-price">Giá gốc: &nbsp; <span> {formatAmount(calculateOriginalPrice(33728000))}</span></div>
+
               </div>
             </div>
-            <div className="id-nick-game">THÔNG TIN CHI TIẾT</div>
             <div className="information-item-detail">
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                  Tướng
+                <ArrowRightIcon/>	Tướng
                 </div>
                 <div className="description-background-information-item-detail">
                   49
@@ -179,7 +205,7 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                  Trang phục
+                <ArrowRightIcon/>	Trang phục
                 </div>
                 <div className="description-background-information-item-detail">
                   75
@@ -187,15 +213,15 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                  Rank
+                <ArrowRightIcon/>	Rank
                 </div>
                 <div className="description-background-information-item-detail">
-                  bk
+                  Thách đấu
                 </div>
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                  Tỉ lệ thắng
+                <ArrowRightIcon/>	Tỉ lệ thắng
                 </div>
                 <div className="description-background-information-item-detail">
                   100%
@@ -203,19 +229,20 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                  Trạng thái
+                <ArrowRightIcon/>	 Trạng thái
                 </div>
                 <div className="description-background-information-item-detail">
-                  ttt
+                  Trắng Thông tin
                 </div>
               </div>
             </div>
             <div className="background-button-buy">
-
-                <div className="content-background-button-buy">
-                  <CardGiftcardIcon />
-                  <div className="text-content-background-button-buy">Mua ngay</div>
+              <div className="content-background-button-buy">
+                <CardGiftcardIcon />
+                <div className="text-content-background-button-buy">
+                  Mua ngay
                 </div>
+              </div>
             </div>
           </div>
         </div>

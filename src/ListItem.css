@@ -32,14 +32,12 @@
   margin-left: 15px; /* Adjust the left margin as needed */
   border-radius: 5px;
   border: 1px solid #ccc;
-
 }
 
 .buttons-filter-list-item > *:first-child:focus {
   outline: none; /* Loại bỏ viền màu khi chọn */
   border-color: #dc2626; /* Màu viền khi chọn */
 }
-
 
 .buttons-filter-list-item > *:last-child {
   margin-right: 15px; /* Adjust the right margin as needed */
@@ -209,9 +207,8 @@
     border-radius: 8px; /* Bo tròn viền của các option thành hình vuông */
     border: 1px solid black; /* Tạo viền bo vuông với độ dày là 1px và màu sắc là đen */
   }
-  .body-list{
+  .body-list {
     grid-template-columns: repeat(2, 1fr);
-
   }
   .select-filter-list-item {
     width: 100%; /* Đảm bảo rằng phần tử select có chiều rộng tối đa */
@@ -222,16 +219,17 @@
     width: 90%;
     margin: 0 auto;
     bottom: 69px;
-   
+  }
+  
 }
-}
+  .body-list-item:hover {
+    border: solid 1px #dc2626;
+  }
 input {
   text-indent: 5px; /* Di chuyển chữ về phía bên phải 5px */
-
 }
 input:focus {
   outline: #dc2626; /* Loại bỏ viền màu khi chọn */
-  
 }
 
 .custom-select {
@@ -250,7 +248,7 @@ input:focus {
 }
 
 .custom-select select + div:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 0;
