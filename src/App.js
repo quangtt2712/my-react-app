@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState  } from "react";
 
 
 import Swipers from "./swiper";
@@ -13,10 +13,25 @@ import ItemDetail from "./ItemDetail";
 
 function App() {
   const { pathname } = useLocation();
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Lưu vị trí cuộn khi chuyển từ trang danh sách sang trang chi tiết sản phẩm
+    if (pathname === "/item-detail") {
+      setScrollPosition(window.scrollY);
+      window.scrollTo(0, 0);
+    } else {
+      // Nếu không phải là trang chi tiết sản phẩm, đặt vị trí cuộn về đầu trang
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
+
+  useEffect(() => {
+    // Thiết lập lại vị trí cuộn khi quay lại từ trang chi tiết sản phẩm
+    if (pathname === "/list-item") {
+      window.scrollTo(0, scrollPosition);
+    }
+  }, [pathname, scrollPosition]);
 
   return (
     <Routes>

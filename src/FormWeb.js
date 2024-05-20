@@ -1,4 +1,3 @@
-
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -16,73 +15,73 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Login from "./Login";
 export default function FormWeb({ children }) {
-    const [openSubMenus, setOpenSubMenus] = useState({});
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
-    const [selectedButton, setSelectedButton] = useState(0);
-    const [showLoginForm, setShowLoginForm] = useState(false);
-  
-    const handleLoginButtonClick = () => {
-      setShowLoginForm(!showLoginForm);
-    };
-  
-    const handleButtonClick = (index) => {
-      if (index === 1) {
-        toggleSearchList();
-        setSelectedButton(index);
-      } else if (index === 3) {
-        handleLoginButtonClick();
-        setSelectedButton(index);
+  const [openSubMenus, setOpenSubMenus] = useState({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
+  const [selectedButton, setSelectedButton] = useState(0);
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  const handleLoginButtonClick = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
+  const handleButtonClick = (index) => {
+    if (index === 1) {
+      toggleSearchList();
+      setSelectedButton(index);
+    } else if (index === 3) {
+      handleLoginButtonClick();
+      setSelectedButton(index);
+    } else {
+      setSelectedButton(index);
+      setIsSearchListOpen(false);
+    }
+
+    // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
+  };
+
+  const toggleSearchList = () => {
+    setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
+  };
+
+  const toggleSubMenu = (index) => {
+    setOpenSubMenus((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
       } else {
-        setSelectedButton(index);
-        setIsSearchListOpen(false);
+        setScrolled(false);
       }
-  
-      // Thêm bất kỳ logic nào bạn muốn thực hiện khi nhấn vào các nút ở đây
     };
-  
-    const toggleSearchList = () => {
-      setIsSearchListOpen(!isSearchListOpen); // Thêm hàm để toggle SearchList
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
     };
-  
-    const toggleSubMenu = (index) => {
-      setOpenSubMenus((prevState) => ({
-        ...prevState,
-        [index]: !prevState[index],
-      }));
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
-  
-    const closeMenu = () => {
-      setIsMenuOpen(false);
-    };
-    const [scrolled, setScrolled] = useState(false);
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 0) {
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      };
-      const handleResize = () => {
-        setIsMobile(window.innerWidth <= 768); // Cập nhật state khi thay đổi kích thước màn hình
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
-    return (
-       <>
-       <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
+  }, []);
+  return (
+    <>
+      <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
         <div className="container-main">
           <header className="header">
             <div className="logo-and-search">
@@ -101,14 +100,16 @@ export default function FormWeb({ children }) {
                 <div className={`nav-mobile ${isMenuOpen ? "open" : ""}`}>
                   <ClearIcon className="icon-clear" onClick={closeMenu} />
                   <ul className="nav-bar-mobile">
-                  <Link to="/">
-                    <li className="nav-bar-item-mobile">
-                      <a href="#">Trang chủ</a>
-                    </li>
+                    <Link to="/">
+                      <li className="nav-bar-item-mobile">
+                        <a href="#">Trang chủ</a>
+                      </li>
                     </Link>
-                    <li className="nav-bar-item-mobile">
-                      <a href="#">Tổng acc</a>
-                    </li>
+                    <Link to="/list-item">
+                      <li className="nav-bar-item-mobile">
+                        <a href="#">Tổng acc</a>
+                      </li>
+                    </Link>
                     <li className="nav-bar-item-mobile">
                       <a href="#">Skin hot</a>
                     </li>
@@ -364,7 +365,10 @@ export default function FormWeb({ children }) {
               </div>
               <Link to="/">
                 <div className="header-logo">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04" alt="logo" />
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04"
+                    alt="logo"
+                  />
                 </div>
               </Link>
 
@@ -395,9 +399,7 @@ export default function FormWeb({ children }) {
           {/* <Link to="/swiper">Login</Link> */}
         </div>
       </div>
-      <div className="display-body">
-      {children}
-      </div>
+      <div className="display-body">{children}</div>
       <div className="header-body-top-up">
         <BodyTopUp />
       </div>
@@ -456,6 +458,6 @@ export default function FormWeb({ children }) {
           </div>
         </div>
       )}
-       </>
-    )
+    </>
+  );
 }

@@ -12,7 +12,12 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 Modal.setAppElement("#root");
 
 function Swipers({ imageUrls }) {
@@ -149,24 +154,26 @@ const ItemDetail = () => {
             <div className="five-cols-body">
               <Swipers imageUrls={imageUrls} />
             </div>
-            <div>🔥 Ưu tiên khi nạp qua ATM/MOMO sẽ đc lời 50% hơn thẻ cào </div>
+            <div>
+              🔥 Ưu tiên khi nạp qua ATM/MOMO sẽ đc lời 50% hơn thẻ cào{" "}
+            </div>
           </div>
           <div className="seven-cols">
             <div className="background-id-nick-game">
-            <div className="id-nick-game">Mã số: 1303704</div>
-            <p className="description-id-nick-game">
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần
-              long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-              nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần long
-            </p>
+              <div className="id-nick-game">Mã số: 1303704</div>
+              <p className="description-id-nick-game">
+                nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio thần
+                long nak lôi mun chí tôn raz thái nk võ thần lau phi thiên vio
+                thần long nak lôi mun chí tôn raz thái nk võ thần lau phi thiên
+                vio thần long nak lôi mun chí tôn raz thái nk võ thần lau phi
+                thiên vio thần long nak lôi mun chí tôn raz thái nk võ thần lau
+                phi thiên vio thần long nak lôi mun chí tôn raz thái nk võ thần
+                lau phi thiên vio thần long nak lôi mun chí tôn raz thái nk võ
+                thần lau phi thiên vio thần long nak lôi mun chí tôn raz thái nk
+                võ thần lau phi thiên vio thần long nak lôi mun chí tôn raz thái
+                nk võ thần lau phi thiên vio thần long nak lôi mun chí tôn raz
+                thái nk võ thần lau phi thiên vio thần long
+              </p>
             </div>
 
             <div className="text-price-item-detail">
@@ -175,11 +182,13 @@ const ItemDetail = () => {
                   <div className="background-text-atm-momo">
                     <div> Thẻ cào</div>
                     <LocalFireDepartmentIcon />
-
                   </div>
                 </div>
                 <div>{formatAmount(22728000)}</div>
-                <div className="sale-buy-price">Giá gốc: &nbsp;<span> {formatAmount(calculateOriginalPrice(22728000))}</span></div>
+                <div className="sale-buy-price">
+                  Giá gốc: &nbsp;
+                  <span> {formatAmount(calculateOriginalPrice(22728000))}</span>
+                </div>
               </div>
               <div className="small-text">hoặc</div>
               <div className="backgground-text-atm-momo">
@@ -190,14 +199,16 @@ const ItemDetail = () => {
                   </div>
                 </div>
                 <div>{formatAmount(33728000)}</div>
-                <div className="sale-buy-price">Giá gốc: &nbsp; <span> {formatAmount(calculateOriginalPrice(33728000))}</span></div>
-
+                <div className="sale-buy-price">
+                  Giá gốc: &nbsp;{" "}
+                  <span> {formatAmount(calculateOriginalPrice(33728000))}</span>
+                </div>
               </div>
             </div>
             <div className="information-item-detail">
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                <ArrowRightIcon/>	Tướng
+                  <ArrowRightIcon /> Tướng
                 </div>
                 <div className="description-background-information-item-detail">
                   49
@@ -205,7 +216,7 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                <ArrowRightIcon/>	Trang phục
+                  <ArrowRightIcon /> Trang phục
                 </div>
                 <div className="description-background-information-item-detail">
                   75
@@ -213,7 +224,7 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                <ArrowRightIcon/>	Rank
+                  <ArrowRightIcon /> Rank
                 </div>
                 <div className="description-background-information-item-detail">
                   Thách đấu
@@ -221,7 +232,7 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                <ArrowRightIcon/>	Tỉ lệ thắng
+                  <ArrowRightIcon /> Tỉ lệ thắng
                 </div>
                 <div className="description-background-information-item-detail">
                   100%
@@ -229,7 +240,7 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
-                <ArrowRightIcon/>	 Trạng thái
+                  <ArrowRightIcon /> Trạng thái
                 </div>
                 <div className="description-background-information-item-detail">
                   Trắng Thông tin
@@ -245,8 +256,15 @@ const ItemDetail = () => {
               </div>
             </div>
           </div>
+
         </div>
+        <Link to="/list-item" className="pagination btn-back">
+            <button>
+              Quay lại 
+            </button>
+          </Link>
       </div>
+      
     </FormWeb>
   );
 };

@@ -273,8 +273,17 @@ const ListItem = () => {
     } else {
       const pageNumber = Math.max(1, Math.min(totalPages, Number(value)));
       setCurrentPage(pageNumber);
+          localStorage.setItem('currentPage', pageNumber); // Lưu trạng thái trang vào local storage
+
     }
   };
+  React.useEffect(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage) {
+      setCurrentPage(Number(savedPage));
+    }
+  }, []);
+  
 
   const renderPagination = () => (
     <div className="pagination">
