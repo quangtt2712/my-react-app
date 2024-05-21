@@ -2,7 +2,9 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Navbar from "./Navbar";
-import React, { useEffect, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import Payment from "./component/payment";
+import React, { useEffect, useState, useRef } from "react";
 import SearchList from "./SearchList";
 import { Link } from "react-router-dom";
 import BodyTopUp from "./BodyTopUp";
@@ -20,7 +22,29 @@ export default function FormWeb({ children }) {
   const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
   const [selectedButton, setSelectedButton] = useState(0);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const useOutsideClick = (ref, callback) => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        callback();
+      }
+    };
 
+    useEffect(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+  const loginFormRef = useRef(null);
+  const paymentFormRef = useRef(null);
+  useOutsideClick(loginFormRef, () => setShowLoginForm(false));
+  useOutsideClick(paymentFormRef, () => setShowPaymentForm(false));
+
+  const handlePaymentButtonClick = () => {
+    setShowPaymentForm(!showPaymentForm);
+  };
   const handleLoginButtonClick = () => {
     setShowLoginForm(!showLoginForm);
   };
@@ -375,7 +399,7 @@ export default function FormWeb({ children }) {
               {!isMobile && <SearchList />}
             </div>
             <div className="user-controls">
-              <div className="top-up-and-icon" type="button">
+              <div className="top-up-and-icon" type="button"                 onClick={handlePaymentButtonClick}>
                 <MonetizationOnIcon className="icon-top-up" />
                 <div className="top-up">Nạp tiền</div>
               </div>
@@ -455,6 +479,17 @@ export default function FormWeb({ children }) {
               className="login-clear-icon"
             />
             <Login />
+          </div>
+        </div>
+      )}
+      {showPaymentForm && (
+        <div className="login-form-overlay">
+          <div className="payment-form-container" ref={paymentFormRef}>
+            <Payment />
+            <CloseIcon
+              className="icon-payment-form-container"
+              onClick={handlePaymentButtonClick}
+            />
           </div>
         </div>
       )}

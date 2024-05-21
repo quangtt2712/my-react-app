@@ -101,16 +101,16 @@
   border-top: 1px dashed rgb(172, 174, 177); /* Viền nét đứt ở phía trên */
 }
 .description-item {
-padding: 4px;
+  padding: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgb(239, 68, 68);
   text-transform: uppercase;
   font-weight: 600;
-  padding-left: .75rem;
-    padding-right: .75rem;
-    color: #fff;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: #fff;
 }
 .description-item-icon {
   color: #dc2626;
@@ -225,11 +225,10 @@ padding: 4px;
     margin: 0 auto;
     bottom: 69px;
   }
-  
 }
-  .body-list-item:hover {
-    border: solid 1px #dc2626;
-  }
+.body-list-item:hover {
+  border: solid 1px #dc2626;
+}
 input {
   text-indent: 5px; /* Di chuyển chữ về phía bên phải 5px */
 }
@@ -282,7 +281,7 @@ input:focus {
 .sale-price-item {
   text-decoration-line: line-through;
   font-size: smaller;
-  padding-left: 10px;
+  padding-left: 6px;
   color: rgb(113, 113, 122);
 }
 .flex-sale-price-item > span {
@@ -291,28 +290,28 @@ input:focus {
   font-size: x-small;
   font-weight: 600;
   font-size: 80%;
-  margin-left: .25rem;
+  margin-left: 0.25rem;
 }
-.flex-sale-price-item{
+.flex-sale-price-item {
   display: flex;
 }
-.id-and-sale-price-item{
+.id-and-sale-price-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .id-item {
-  font-size: .75rem;
-  
+  font-size: 0.75rem;
+
   font-weight: 700;
   line-height: 1rem;
-  padding-bottom: .125rem;
-    padding-top: .125rem;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    background-color: #dc2626;
-    border-radius: .25rem;
-    color: #fff;
-    margin-right: 5px;
-    padding: 6px;
+  padding-bottom: 0.125rem;
+  padding-top: 0.125rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #dc2626;
+  border-radius: 0.25rem;
+  color: #fff;
+  margin-right: 5px;
+  padding: 6px;
 }

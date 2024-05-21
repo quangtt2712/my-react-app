@@ -29,7 +29,7 @@ const ListItem = () => {
   const allItems = [
     {
       id: 1,
-      price: 100000,
+      price: 10000000,
       champions: 50,
       skins: 30,
       rank: "Thách đấu",
@@ -38,7 +38,7 @@ const ListItem = () => {
     },
     {
       id: 2,
-      price: 200000,
+      price: 20000000,
       champions: 60,
       skins: 35,
       rank: "Kim cương",
@@ -47,7 +47,7 @@ const ListItem = () => {
     },
     {
       id: 3,
-      price: 300000,
+      price: 30000000,
       champions: 70,
       skins: 40,
       rank: "Bạch kim",
@@ -56,7 +56,7 @@ const ListItem = () => {
     },
     {
       id: 4,
-      price: 400000,
+      price: 40000000,
       champions: 80,
       skins: 45,
       rank: "Vàng",
@@ -65,7 +65,7 @@ const ListItem = () => {
     },
     {
       id: 5,
-      price: 500000,
+      price: 50000000,
       champions: 90,
       skins: 50,
       rank: "Bạc",
@@ -74,7 +74,7 @@ const ListItem = () => {
     },
     {
       id: 6,
-      price: 600000,
+      price: 60000000,
       champions: 100,
       skins: 55,
       rank: "Đồng",
@@ -344,7 +344,7 @@ const ListItem = () => {
                 type="text"
                 value={searchInput}
                 onChange={handleInputChange}
-                placeholder="Nhập id nick..."
+                placeholder="Nhập ID nick..."
               />
               <Select
                 value={priceFilter}

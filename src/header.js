@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 
 import Navbar from "./Navbar";
 import SearchList from "./SearchList";
@@ -22,7 +23,9 @@ import BodyLQ from "./BodyLQ";
 import BodyTopUp from "./BodyTopUp";
 import BodyTopUpBottom from "./BodyTopUpBottom";
 import Footer from "./Footer";
+import CloseIcon from "@mui/icons-material/Close";
 import Login from "./Login";
+import Payment from "./component/payment";
 
 export default function Header() {
   const [openSubMenus, setOpenSubMenus] = useState({});
@@ -32,6 +35,11 @@ export default function Header() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+
+  const handlePaymentButtonClick = () => {
+    setShowPaymentForm(!showPaymentForm);
+  };
 
   const handleLoginButtonClick = () => {
     setShowLoginForm(!showLoginForm);
@@ -83,6 +91,24 @@ export default function Header() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const useOutsideClick = (ref, callback) => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        callback();
+      }
+    };
+
+    useEffect(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+  const loginFormRef = useRef(null);
+  const paymentFormRef = useRef(null);
+  useOutsideClick(loginFormRef, () => setShowLoginForm(false));
+  useOutsideClick(paymentFormRef, () => setShowPaymentForm(false));
 
   return (
     <>
@@ -390,7 +416,11 @@ export default function Header() {
               {!isMobile && <SearchList />}
             </div>
             <div className="user-controls">
-              <div className="top-up-and-icon" type="button">
+              <div
+                className="top-up-and-icon"
+                type="button"
+                onClick={handlePaymentButtonClick}
+              >
                 <MonetizationOnIcon className="icon-top-up" />
                 <div className="top-up">Nạp tiền</div>
               </div>
@@ -463,12 +493,23 @@ export default function Header() {
       </div>
       {showLoginForm && (
         <div className="login-form-overlay">
-          <div className="login-form-container">
+          <div className="login-form-container" ref={loginFormRef}>
             <ClearIcon
               onClick={handleLoginButtonClick}
               className="login-clear-icon"
             />
             <Login />
+          </div>
+        </div>
+      )}
+      {showPaymentForm && (
+        <div className="login-form-overlay">
+          <div className="payment-form-container" ref={paymentFormRef}>
+            <Payment />
+            <CloseIcon
+              className="icon-payment-form-container"
+              onClick={handlePaymentButtonClick}
+            />
           </div>
         </div>
       )}

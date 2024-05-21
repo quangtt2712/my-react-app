@@ -925,6 +925,22 @@ samp {
   .header-logo {
     display: flex;
   }
+  .payment-form-container {
+    width: 96% !important;
+  }
+  .display-qr {
+    flex-direction: column;
+  }
+  .infor-display-qr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-cp-phone {
+    width: auto !important;
+    margin-bottom: 10px;
+  }
 }
 .text-background-searchlist-bottom{
   color: #282c34;
@@ -1094,7 +1110,25 @@ samp {
   max-width: 400px; 
 
 }
-
+.payment-form-container {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 80%; /* Độ rộng của form, có thể thay đổi tùy ý */
+  max-width: 600px; 
+}
+.momo-form-container {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 80%; /* Độ rộng của form, có thể thay đổi tùy ý */
+  max-width: 600px; 
+  height: auto;
+}
 .login-form {
   width: 100%;
   
@@ -1160,4 +1194,149 @@ input:focus {
   display: flex;
   align-items: center;
 
+}
+.display-payment {
+  display: flex;
+  padding: 10px;
+  border-bottom: dashed 1px rgb(226, 232, 240);
+  cursor: pointer;
+}
+.display-payment:last-child {
+  border-bottom: none;
+}
+.display-payment > img {
+  height: 3rem;
+  max-width: 100%;
+  object-fit: contain;
+}
+.text-payment{
+  padding-left: 10px;
+}
+.display-payment:hover {
+  background-color: rgb(244, 244, 245);
+}
+.title-text-payment{
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.header-payment{
+  font-size: large;
+  padding-bottom: 5px;
+}
+.icon-payment-form-container{
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  cursor: pointer;
+}
+
+.display-qr{
+  display: flex;
+  background-image: url(https://tailwindcss.com/_next/static/media/hero@75.b2469a49.jpg);
+  background-size: 40rem;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.main-display-qr {
+  flex: 3;
+  padding-left: 5px;
+}
+.infor-display-qr{
+  flex: 7;
+  text-transform: uppercase;
+  border-right: 1px solid rgb(226, 232, 240); /* Thiết lập viền bên phải */
+
+  
+}
+strong > span {
+  color: #dc2626;
+}
+.main-display-qr > img {
+  width: 100%;
+  height: auto;
+}
+.btn-cp-phone{
+  margin-top: 10px;
+  width: 50%;
+  padding: 5px;
+  background-color: #282c34;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.content-payment-qr-momo{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 2px dashed #dc2626;
+  color: #dc2626;
+  font-weight: 800;
+  font-size: large;
+  border-radius: 5px;
+}
+.p-qr{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.btn-cp-id{
+  text-transform: uppercase;
+  background-color: #dc2626;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+  font-size: smaller;
+  text-align: center;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+.description-content-momo{
+  margin-top: 10px;
+}
+.id-qr-decription {
+  color: #dc2626;
+  font-weight: 600;
+}
+.swap-money{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.ip-swap-money{
+  border: none;
+  width: 100%;
+}
+.display-swap-money {
+  border: solid 2px rgb(203, 213, 225);
+  border-radius: 5px;
+  padding: 5px;
+}
+.display-swap-money > div {
+  font-size: smaller;
+}
+.display-swap-money:focus-within {
+  border-color: #dc2626; /* Màu viền khi có phần tử con được focus */
+}
+.text-swap-money{
+  font-weight: 700;
+  color: #dc2626;
+  text-transform: uppercase;
+  padding: 2px;
+}
+.waring-etx{
+  margin-top: 10px;
+  padding: 5px 0;
+  border-top: solid 1px #dc2626;
+  border-bottom: solid 1px #dc2626;
+  margin-bottom: 10px;
+}
+.back-ground-money-momo{
+  max-height: 80vh; /* Giới hạn chiều cao của phần cuộn nội dung */
+  overflow-y: auto;
 }

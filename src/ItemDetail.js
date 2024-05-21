@@ -240,6 +240,14 @@ const ItemDetail = () => {
               </div>
               <div className="background-information-item-detail">
                 <div className="text-background-information-item-detail">
+                  <ArrowRightIcon /> Ngọc
+                </div>
+                <div className="description-background-information-item-detail">
+                  90
+                </div>
+              </div>
+              <div className="background-information-item-detail">
+                <div className="text-background-information-item-detail">
                   <ArrowRightIcon /> Trạng thái
                 </div>
                 <div className="description-background-information-item-detail">
