@@ -1340,3 +1340,109 @@ strong > span {
   max-height: 80vh; /* Giới hạn chiều cao của phần cuộn nội dung */
   overflow-y: auto;
 }
+.background-profile {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* Tạo lưới 12 cột */
+  gap: 16px; /* Khoảng cách giữa các cột, nếu cần */
+}
+
+.background-profile > div:nth-child(1) {
+  grid-column: span 3; /* Div đầu tiên chiếm 3 cột */
+}
+
+.background-profile > div:nth-child(2) {
+  grid-column: span 9; /* Div thứ hai chiếm 9 cột */
+}
+.background-avatar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.background-avatar img {
+  border-radius: 50%; /* Bo tròn ảnh */
+  width: 20%; /* Điều chỉnh kích thước ảnh theo yêu cầu */
+  height: 20%; /* Điều chỉnh kích thước ảnh theo yêu cầu */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  margin-right: 10px;
+}
+.background-body-profile {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 150px;
+}
+.background-content-avatar {
+  height: auto;
+}
+.flex-background-content-avatar {
+  font-size: large;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+  background-color: #fff;
+  color: rgb(63, 63, 70);
+}
+.flex-background-content-avatar > div {
+  margin-left: 10px;
+  font-size: medium;
+}
+.margin-flex-background-content-avatar {
+  margin-bottom: 10px;
+}
+.margin-flex-background-content-avatar .flex-background-content-avatar:not(:last-child) {
+  border-bottom: 1px solid rgb(226, 232, 240); /* Bạn có thể thay đổi màu sắc và kiểu border theo ý muốn */
+}
+.back-profile-customer{
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  display: flex;
+}
+.text-back-profile-customer {
+  margin: 19.5px auto;
+}
+.back-profile-customer {
+  padding: 16px;
+  border-radius: 5px;
+}
+.flex-description-profile-customer {
+  display: flex;
+  padding: 10px;
+}
+.description-profile-customer {
+  width: 50%;
+}
+.title-flex-description-profile-customer{
+  flex: 5;
+}
+.flex-description-profile-customer-vn {
+  display: flex;
+  color: #dc2626;
+}
+.dash-customeser {
+  border-top: solid 1px rgb(226, 232, 240);
+}
+.input-customer{
+  width: 70%;
+  border: solid 1px rgb(226, 232, 240);
+  padding: 5px;
+  border-radius: 5px;
+}
+.display-flex{
+  display: flex;
+  justify-content: space-between;
+}
+.btn-customer {
+  width: 28%;
+  background-color: #dc2626;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.input-customer:focus {
+  border: solid 1px #dc2626;
+}
