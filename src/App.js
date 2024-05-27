@@ -10,6 +10,7 @@ import ListItem from "./ListItem";
 import Testcomponent from "./testcomponent";
 import ItemDetail from "./ItemDetail";
 import InforNick from "./InforNick";
+import { AuthProvider } from "./AuthContext";
 
 function App() {
   const { pathname } = useLocation();
@@ -34,15 +35,18 @@ function App() {
   }, [pathname, scrollPosition]);
 
   return (
-    <Routes>
-      <Route path="/swiper" element={<Swipers />} />
-      <Route path="/" element={<Header />} />
-      <Route path="/FormWeb" element={<FormWeb />} />
-      <Route path="/list-item" element={<ListItem />} />
-      <Route path="/test-component" element={<Testcomponent />}></Route>
-      <Route path="/item-detail" element={<ItemDetail />}></Route>
-      <Route path="/profile" element={<InforNick />} />
-    </Routes>
+    <>
+
+      <Routes>
+        <Route path="/swiper" element={<Swipers />} />
+        <Route path="/" element={<Header />} />
+        <Route path="/FormWeb" element={<FormWeb />} />
+        <Route path="/list-item" element={<ListItem />} />
+        <Route path="/test-component" element={<Testcomponent />}></Route>
+        <Route path="/item-detail" element={<ItemDetail />}></Route>
+        <Route path="/profile" element={<InforNick />} />
+      </Routes>
+    </>
   );
 }
 

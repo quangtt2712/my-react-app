@@ -2,6 +2,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Navbar from "./Navbar";
+import { Helmet } from "react-helmet";
 import CloseIcon from "@mui/icons-material/Close";
 import Payment from "./component/payment";
 import React, { useEffect, useState, useRef } from "react";
@@ -16,6 +17,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Login from "./Login";
+import { Skeleton } from "@mui/material";
+import * as signalR from "@microsoft/signalr";
+
 export default function FormWeb({ children }) {
   const [openSubMenus, setOpenSubMenus] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -23,6 +27,101 @@ export default function FormWeb({ children }) {
   const [selectedButton, setSelectedButton] = useState(0);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [registerUserName, setRegisterUserName] = useState("");
+  const [showProfileNavBar, setShowProfileNavBar] = useState(false);
+
+  const [moneyUser, setMoneyUser] = useState(0);
+  const [idUser, setIdUser] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [refesh, setRefesh] = useState(false);
+
+  const checkAccessToken = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    setIsLoggedIn(accessToken ? true : false);
+  };
+
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl("https://shopaccduyanh.azurewebsites.net/api/balanceHub")
+      .build();
+
+    connection.on("ReceiveBalance", (balance) => {
+      setLoading(true)
+      setBalance(balance);
+      setLoading(false)
+      console.log('balance",balance: ',balance);
+    });
+
+    connection
+      .start()
+      .then(() => {
+        setLoading(true);
+        console.log("Connection established");
+        console.log(idUser);
+        setLoading(false);
+
+        return connection.invoke("ListenForBalanceChanges", idUser);
+      })
+      .catch((err) => {
+        console.error("Connection error: ", err.toString());
+     
+      });
+ 
+    // Cleanup on component unmount
+    return () => {
+      connection
+        .stop()
+        .catch((err) => console.error("Error stopping connection:", err));
+    
+    };
+
+       }, [idUser, showLoginForm, isLoggedIn, refesh]);
+     
+  const handleLogoutButtonClick = () => {
+    localStorage.clear();
+      setRefesh((b) => !b);
+      setBalance(0);
+      setShowLoginForm(!showLoginForm);
+  };
+  const handleProfileButtonClick = () => {
+    setShowProfileNavBar(!showProfileNavBar);
+  };
+  useEffect(() => {
+    checkAccessToken(); // Check access token when component mounts
+    if (isLoggedIn) {
+      handleFormUser();
+    }
+  }, [isLoggedIn, refesh]);
+
+  const handleFormUser = () => {
+    fetch(
+      "https://shopaccduyanh.azurewebsites.net/api/User/Information-user-by-token",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setIdUser(data.id);
+        setMoneyUser(data.wallet.balance);
+        setRegisterUserName(data.userName);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const handleRegisterSuccess = (accessToken) => {
+    setShowLoginForm(false);
+    handleFormUser();
+  };
   const useOutsideClick = (ref, callback) => {
     const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -45,10 +144,15 @@ export default function FormWeb({ children }) {
   const handlePaymentButtonClick = () => {
     setShowPaymentForm(!showPaymentForm);
   };
-  const handleLoginButtonClick = () => {
+  const handleLoginButtonClick = (username) => {
     setShowLoginForm(!showLoginForm);
   };
-
+  const formatAmount = (amount) => {
+    return amount.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
   const handleButtonClick = (index) => {
     if (index === 1) {
       toggleSearchList();
@@ -105,6 +209,15 @@ export default function FormWeb({ children }) {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Shop acc Duy Anh</title>
+        <link
+          rel="icon"
+          type="image/png"
+          href="../public/favicon.ico"
+          sizes="16x16"
+        />
+      </Helmet>
       <div className={`header-main ${scrolled ? "scrolled" : ""}`}>
         <div className="container-main">
           <header className="header">
@@ -389,17 +502,18 @@ export default function FormWeb({ children }) {
               </div>
               <Link to="/">
                 <div className="header-logo">
-                  <img
-                    src="https://firebasestorage.googleapis.com/v0/b/mindmasterminds.appspot.com/o/images%2FYena%20huy%E1%BB%81n%20c%E1%BB%ADu%20thi%C3%AAn.lafthanh.png?alt=media&token=9cbc8e34-20c3-42dd-a011-50dbefa14f04"
-                    alt="logo"
-                  />
+                  <img src="/lgo.png" alt="logo" />
                 </div>
               </Link>
 
               {!isMobile && <SearchList />}
             </div>
             <div className="user-controls">
-              <div className="top-up-and-icon" type="button"                 onClick={handlePaymentButtonClick}>
+              <div
+                className="top-up-and-icon"
+                type="button"
+                onClick={handlePaymentButtonClick}
+              >
                 <MonetizationOnIcon className="icon-top-up" />
                 <div className="top-up">Nạp tiền</div>
               </div>
@@ -407,15 +521,51 @@ export default function FormWeb({ children }) {
               <div className="notification" type="button">
                 <NotificationsNoneIcon className="notification-icon" />
               </div>
-
-              <div
-                className="login"
-                type="button"
-                onClick={handleLoginButtonClick}
-              >
-                <PersonIcon className="login-icon" />
-                <div className="login-text">Đăng nhập/ Đăng kí</div>
-              </div>
+              {localStorage.getItem("accessToken") ? (
+                // Hiển thị nút đăng kí với tên người dùng từ JSON của API
+                <div
+                  className="user-controls btn-profile"
+                  onClick={handleProfileButtonClick}
+                >
+                  <img
+                    src="https://shopmailk.com/unknown-avatar.jpeg"
+                    alt="avatar"
+                  ></img>
+                  <div>
+                    <div className="name-user-navbar">{registerUserName}</div>
+                    <div className="name-user-navbar wallet-user">
+                      {loading ? "Loading..." : formatAmount(balance)}
+                    </div>
+                  </div>
+                  {showProfileNavBar && (
+                    <div className="information-me">
+                      <div>
+                        <strong>ID: {idUser}</strong>
+                      </div>
+                      <div>
+                        <strong>Số dư: {loading ? "Loading..." : formatAmount(balance)}</strong>
+                      </div>
+                      <div className="btn-profile-me">Quản lí tài khoản</div>
+                      <div
+                        className="btn-profile-me"
+                        onClick={handleLogoutButtonClick}
+                      >
+                        Đăng xuất
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div
+                  className="login"
+                  type="button"
+                  onClick={handleLoginButtonClick}
+                >
+                  <PersonIcon className="login-icon" />
+                  {console.log("rerender")}
+                  <div className="login-text">Đăng nhập/ Đăng kí</div>
+                </div>
+              )}
             </div>
           </header>
           <Navbar />
@@ -478,7 +628,7 @@ export default function FormWeb({ children }) {
               onClick={handleLoginButtonClick}
               className="login-clear-icon"
             />
-            <Login />
+            <Login handleDataFromChild={handleRegisterSuccess} />
           </div>
         </div>
       )}

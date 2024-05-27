@@ -1,12 +1,45 @@
 import React, { useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Register from "./Register";
-const Login = ({ onRegisterClick }) => {
+const Login = ({ handleDataFromChild }) => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const response = await fetch(
+        "https://shopaccduyanh.azurewebsites.net/api/User/Login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+
+      if (response.ok) {
+        const userData = await response.json();
+        localStorage.setItem("accessToken", userData.accessToken);
+        handleDataFromChild(userData.accessToken);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleRegisterSuccess = (data) => {
+    if (data === null) {
+      console.log("null");
+    } else {
+      console.log(data);
+      handleDataFromChild(data);
+    }
   };
 
   const handleRegisterClick = () => {
@@ -53,7 +86,7 @@ const Login = ({ onRegisterClick }) => {
           </button>
         </form>
       ) : (
-        <Register />
+        <Register onRegisterSuccess={handleRegisterSuccess} />
       )}
     </div>
   );

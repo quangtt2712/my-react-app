@@ -163,10 +163,36 @@ const InforNick = () => {
                   </div>
                 </div>
                 <div className="description-profile-customer ">
+                  <div className="change-password">
+                    <div>Đổi mật khẩu</div>
+                    <div>Mật khẩu hiện tại</div>
+                    <input
+                      type="password"
+                      className="btn-change-password"
+                    ></input>
 
+                    <div>Mật khẩu mới</div>
+                    <input
+                      type="password"
+                      className="btn-change-password"
+                    ></input>
+
+                    <div>Mật khẩu hiện tại</div>
+                    <input
+                      type="password"
+                      className="btn-change-password"
+                    ></input>
+                    <div className="btn-pass-customer">Cập nhật</div>
+                  </div>
                 </div>
               </div>
             </div>
+            {/* <div>
+              <div className="text-back-profile-customer">
+                Thông tin tài khoản
+              </div>
+              <div className="no-data-profile-customer">Chưa có dữ liệu</div>
+            </div> */}
           </div>
         </div>
       </FormWeb>

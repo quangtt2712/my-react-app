@@ -1,10 +1,51 @@
 import React, { useState } from "react";
 import Login from "./Login";
 
-const Register = ({ onLoginClick }) => {
-  const handleSubmit = (e) => {
+const Register = ({ onRegisterSuccess }) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const registerResponse = await fetch(
+        "https://shopaccduyanh.azurewebsites.net/api/User/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+
+      if (registerResponse.ok) {
+        const loginResponse = await fetch(
+          "https://shopaccduyanh.azurewebsites.net/api/User/Login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          }
+        );
+        if (loginResponse.ok) {
+          const userData = await loginResponse.json();
+          setLoginForm(true);
+          localStorage.setItem("accessToken", userData.accessToken);
+          onRegisterSuccess(userData.accessToken);
+        } else {
+          <alert>Đăng nhập thất bại</alert>;
+        }
+      } else {
+        <alert>Đăng kí thất bại</alert>;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const [showLoginForm, setLoginForm] = useState(false);
@@ -44,14 +85,13 @@ const Register = ({ onLoginClick }) => {
           <button type="submit" className="btn btn-primary">
             ĐĂNG KÝ
           </button>
-          <button type="button" className="btn"
-            onClick={handleonLoginClick}
-          >
+          <button type="button" className="btn" onClick={handleonLoginClick}>
             Đã có tài khoản? Đăng nhập
           </button>
         </form>
-      ) : 
-      <Login />}
+      ) : (
+        <Login />
+      )}
     </>
   );
 };

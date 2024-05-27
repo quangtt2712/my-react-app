@@ -131,9 +131,21 @@ samp {
 }
 .user-controls {
   display: flex;
+  align-items: center;
+}
+.user-controls > img {
+  height: 2.25rem;
+}
+.name-user-navbar {
+  margin-left: 10px;
+  font-size: 80%;
+  font-weight: 500;
 }
 .logo-and-search {
   display: flex;
+}
+.wallet-user {
+  color: #dc2626;
 }
 
 .header-logo > img {
@@ -1448,6 +1460,7 @@ strong > span {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  cursor: pointer;
 }
 .input-customer:focus {
   border: solid 1px #dc2626;
@@ -1456,4 +1469,64 @@ strong > span {
 .flex-background-content-avatar:hover {
   background-color: #dc2626;
   color: #fff;
+}
+.change-password {
+  padding-left: 10px;
+}
+.btn-change-password {
+  width: 100%;
+  border: solid 1px rgb(226, 232, 240);
+  height: 35px;
+  border-radius: 5px;
+  margin-top: 10px;
+
+}
+.btn-change-password:focus {
+  border-color: #dc2626;
+}
+.btn-pass-customer {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  color: #fff;
+  background-color: #dc2626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.no-data-profile-customer {
+  background-color: #fff;
+  height: 87.5%;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-profile-me {
+  cursor: pointer;
+  
+}
+.btn-profile-me:hover {
+  background-color: #fff;
+  color: #282c34;
+}
+.btn-profile {
+  cursor: pointer;
+  position: relative;
+}
+.information-me {
+  position: absolute;
+  width: 200px;
+  background-color: rgb(239, 68, 68);
+  top: 39px;
+  color: #fff;
+  z-index: 3;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: default;
+}
+.information-me > div {
+  padding: 5px;
 }

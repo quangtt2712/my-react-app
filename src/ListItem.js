@@ -3,7 +3,7 @@ import FormWeb from "./FormWeb";
 import "./ListItem.css";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Select({ value, onChange, options }) {
   return (
@@ -24,6 +24,10 @@ const ListItem = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [materialFilter, setMaterialFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
   const itemsPerPage = 8; // Số lượng items mỗi trang
 
   const allItems = [
@@ -245,9 +249,6 @@ const ListItem = () => {
     },
   ]; // Dữ liệu mẫu cho tất cả items
 
-  const totalItems = allItems.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
   };
@@ -266,6 +267,35 @@ const ListItem = () => {
       currency: "VND",
     });
   };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          `https://shopaccduyanh.azurewebsites.net/api/Product?pageNumber=${currentPage}&pageSize=${itemsPerPage}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.data);
+          setTotalItems(data.pagination.totalRow);
+          setTotalPages(data.pagination.totalPages);
+
+          console.log(data.data[0]);
+        } else {
+          console.error("Failed to fetch products");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [currentPage]);
 
   const handlePageChange = (value) => {
     if (value === "" || isNaN(value)) {
@@ -308,10 +338,6 @@ const ListItem = () => {
     </div>
   );
 
-  const displayedItems = allItems.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
   const priceOptions = [
     { value: "all", label: "Tất cả" },
     { value: "", label: "Dưới 100.000đ" },
@@ -367,11 +393,17 @@ const ListItem = () => {
             </div>
           </div>
           <div className="body-list">
-            {displayedItems.map((item) => (
+            {products.map((item) => (
               <Link to="/item-detail" key={item.id}>
                 <div className="body-list-item">
+                  {item.imageProducts &&
+                    item.imageProducts.length > 0 &&
+                    console.log(
+                      item.imageProducts[0].baseURL
+                    ) // Log the URL
+                  }
                   <img
-                    src="https://sys.tmso1.co/images/s3ph895jqSpcrj9.png"
+                    src={item.imageProducts && item.imageProducts.length > 0 ? item.imageProducts[0].baseURL : ""}
                     alt=""
                     className="body-list-item-img"
                   ></img>
@@ -381,7 +413,7 @@ const ListItem = () => {
                         <div className="sale-price-item">
                           {formatAmount(item.price)}
                         </div>
-                        <span>-50%</span>
+                        <span>-{item.sale}%</span>
                       </div>
 
                       <div className="price-item">
@@ -389,21 +421,20 @@ const ListItem = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="id-item">ID 12345</div>
+                      <div className="id-item">ID {item.id}</div>
                     </div>
                   </div>
-
                   <div className="infor-nick-item">
                     <div className="number-char-item">
                       <div className="title-number-char-item">Tướng:</div>
                       <div className="description-number-char-item">
-                        {item.champions}{" "}
+                        {item.champion}{" "}
                       </div>
                     </div>
                     <div className="number-char-item">
                       <div className="title-number-char-item">Trang phục:</div>
                       <div className="description-number-char-item">
-                        {item.skins}{" "}
+                        {item.skin}{" "}
                       </div>
                     </div>
                     <div className="number-char-item">
@@ -418,12 +449,15 @@ const ListItem = () => {
                       </div>
                       <div className="description-number-char-item">
                         {" "}
-                        {item.winRate}{" "}
+                        {item.rateWin}{" "}
                       </div>
                     </div>
                     <div className="number-char-item">
                       <div className="title-number-char-item">Ngọc: </div>
-                      <div className="description-number-char-item"> 90</div>
+                      <div className="description-number-char-item">
+                        {" "}
+                        {item.runes}
+                      </div>
                     </div>
                   </div>
                   <div>
