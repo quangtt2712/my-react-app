@@ -1076,7 +1076,7 @@ samp {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 .grid-item {
   text-align: center; /* Căn giữa nội dung trong các phần */
@@ -1528,5 +1528,24 @@ strong > span {
   cursor: default;
 }
 .information-me > div {
+  padding: 5px;
+}
+.error-message {
+  color: red; /* Change this to your preferred color */
+  font-size: 0.875em; /* Adjust font size as needed */
+  margin-top: 0.25em; /* Space between the error message and the input */
+}
+@media (max-width: 480px) {
+.btn-profile {
+  color: #282c34;
+  margin-right: 10px;
+}
+.information-me {
+  bottom: 58px;
+  right: -10px;
+  top: auto;
+}
+}
+.padding-5px{
   padding: 5px;
 }

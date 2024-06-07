@@ -11,6 +11,8 @@ import Testcomponent from "./testcomponent";
 import ItemDetail from "./ItemDetail";
 import InforNick from "./InforNick";
 import { AuthProvider } from "./AuthContext";
+import BodyAdmin from "./pages/BodyAdmin.js"
+import Body from "./Body.js";
 
 function App() {
   const { pathname } = useLocation();
@@ -45,6 +47,7 @@ function App() {
         <Route path="/test-component" element={<Testcomponent />}></Route>
         <Route path="/item-detail" element={<ItemDetail />}></Route>
         <Route path="/profile" element={<InforNick />} />
+        <Route path="/body-admin" element={<BodyAdmin />} />
       </Routes>
     </>
   );

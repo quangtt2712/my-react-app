@@ -19,8 +19,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Login from "./Login";
 import { Skeleton } from "@mui/material";
 import * as signalR from "@microsoft/signalr";
+import { jwtDecode } from "jwt-decode";
+import { useGetUserById } from "./hook/userHook";
 
 export default function FormWeb({ children }) {
+  const { loading1, error, notFoundError, getInforUser, inforUser } =
+    useGetUserById();
   const [openSubMenus, setOpenSubMenus] = useState({});
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false); // Thêm state cho SearchList
@@ -44,16 +48,15 @@ export default function FormWeb({ children }) {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-
     const connection = new signalR.HubConnectionBuilder()
       .withUrl("https://shopaccduyanh.azurewebsites.net/api/balanceHub")
       .build();
 
     connection.on("ReceiveBalance", (balance) => {
-      setLoading(true)
+      setLoading(true);
       setBalance(balance);
-      setLoading(false)
-      console.log('balance",balance: ',balance);
+      setLoading(false);
+      console.log('balance",balance: ', balance);
     });
 
     connection
@@ -68,59 +71,73 @@ export default function FormWeb({ children }) {
       })
       .catch((err) => {
         console.error("Connection error: ", err.toString());
-     
       });
- 
+
     // Cleanup on component unmount
     return () => {
       connection
         .stop()
         .catch((err) => console.error("Error stopping connection:", err));
-    
     };
+  }, [idUser, showLoginForm, isLoggedIn, refesh]);
 
-       }, [idUser, showLoginForm, isLoggedIn, refesh]);
-     
   const handleLogoutButtonClick = () => {
     localStorage.clear();
-      setRefesh((b) => !b);
-      setBalance(0);
-      setShowLoginForm(!showLoginForm);
+    setRefesh((b) => !b);
+    setBalance(0);
+    setShowLoginForm(!showLoginForm);
   };
   const handleProfileButtonClick = () => {
     setShowProfileNavBar(!showProfileNavBar);
   };
   useEffect(() => {
-    checkAccessToken(); // Check access token when component mounts
+    checkAccessToken();
     if (isLoggedIn) {
       handleFormUser();
     }
   }, [isLoggedIn, refesh]);
+  useEffect(() => {
+    // Đảm bảo chỉ log khi inforUser thay đổi
+    if (inforUser) {
+      console.log(inforUser);
+      setIdUser(inforUser.id);
+      setMoneyUser(inforUser.wallet.balance);
+      setRegisterUserName(inforUser.userName);
+    }
+  }, [inforUser]);
 
-  const handleFormUser = () => {
-    fetch(
-      "https://shopaccduyanh.azurewebsites.net/api/User/Information-user-by-token",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setIdUser(data.id);
-        setMoneyUser(data.wallet.balance);
-        setRegisterUserName(data.userName);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const handleFormUser = (accessToken) => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
+      const id = parseInt(decodedToken.id);
+      getInforUser(id);
+    }
+
+    // fetch(
+    //   "https://shopaccduyanh.azurewebsites.net/api/User/Information-user-by-token",
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setIdUser(data.id);
+    //     setMoneyUser(data.wallet.balance);
+    //     setRegisterUserName(data.userName);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
 
   const handleRegisterSuccess = (accessToken) => {
     setShowLoginForm(false);
-    handleFormUser();
+    handleFormUser(accessToken);
   };
   const useOutsideClick = (ref, callback) => {
     const handleClickOutside = (event) => {
@@ -521,49 +538,62 @@ export default function FormWeb({ children }) {
               <div className="notification" type="button">
                 <NotificationsNoneIcon className="notification-icon" />
               </div>
-              {localStorage.getItem("accessToken") ? (
-                // Hiển thị nút đăng kí với tên người dùng từ JSON của API
-                <div
-                  className="user-controls btn-profile"
-                  onClick={handleProfileButtonClick}
-                >
-                  <img
-                    src="https://shopmailk.com/unknown-avatar.jpeg"
-                    alt="avatar"
-                  ></img>
-                  <div>
-                    <div className="name-user-navbar">{registerUserName}</div>
-                    <div className="name-user-navbar wallet-user">
-                      {loading ? "Loading..." : formatAmount(balance)}
+              {!isMobile && (
+                <div>
+                  {localStorage.getItem("accessToken") ? (
+                    // Hiển thị nút đăng kí với tên người dùng từ JSON của API
+                    <div
+                      className="user-controls btn-profile"
+                      onClick={handleProfileButtonClick}
+                    >
+                      <img
+                        src="https://shopmailk.com/unknown-avatar.jpeg"
+                        alt="avatar"
+                      ></img>
+                      <div>
+                        <div className="name-user-navbar">
+                          {registerUserName}
+                        </div>
+                        <div className="name-user-navbar wallet-user">
+                          {loading ? "Loading..." : formatAmount(balance)}
+                        </div>
+                      </div>
+                      {showProfileNavBar && (
+                        <div className="information-me">
+                          <div>
+                            <strong>ID: {idUser}</strong>
+                          </div>
+                          <div>
+                            <strong>
+                              Số dư:{" "}
+                              {loading ? "Loading..." : formatAmount(balance)}
+                            </strong>
+                          </div>
+                          <Link to="/profile">
+                            <div className="btn-profile-me padding-5px">
+                              Quản lí tài khoản
+                            </div>
+                          </Link>
+                          <div
+                            className="btn-profile-me"
+                            onClick={handleLogoutButtonClick}
+                          >
+                            Đăng xuất
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  {showProfileNavBar && (
-                    <div className="information-me">
-                      <div>
-                        <strong>ID: {idUser}</strong>
-                      </div>
-                      <div>
-                        <strong>Số dư: {loading ? "Loading..." : formatAmount(balance)}</strong>
-                      </div>
-                      <div className="btn-profile-me">Quản lí tài khoản</div>
-                      <div
-                        className="btn-profile-me"
-                        onClick={handleLogoutButtonClick}
-                      >
-                        Đăng xuất
-                      </div>
+                  ) : (
+                    <div
+                      className="login"
+                      type="button"
+                      onClick={handleLoginButtonClick}
+                    >
+                      <PersonIcon className="login-icon" />
+                      {console.log("rerender")}
+                      <div className="login-text">Đăng nhập/ Đăng kí</div>
                     </div>
                   )}
-                </div>
-              ) : (
-                <div
-                  className="login"
-                  type="button"
-                  onClick={handleLoginButtonClick}
-                >
-                  <PersonIcon className="login-icon" />
-                  {console.log("rerender")}
-                  <div className="login-text">Đăng nhập/ Đăng kí</div>
                 </div>
               )}
             </div>
@@ -584,13 +614,13 @@ export default function FormWeb({ children }) {
         <Footer />
       </div>
 
-      <div class="bottom-bar">
+      <div className="bottom-bar">
         {isSearchListOpen && (
           <diV className="background-searchlist-bottom">
             <SearchList className="bottom-bar-search-list" />
           </diV>
         )}
-        <div class="grid-container">
+        <div className="grid-container">
           <div
             className={`grid-item ${selectedButton === 0 ? "selected" : ""}`}
             onClick={() => handleButtonClick(0)}
@@ -605,20 +635,59 @@ export default function FormWeb({ children }) {
             <SearchIcon className="icon-bottom-bar" />
             <div className="text-icon-bottom-bar">Tìm kiếm</div>
           </div>
-          <div
-            className={`grid-item ${selectedButton === 2 ? "selected" : ""}`}
-            onClick={() => handleButtonClick(2)}
-          >
-            <AccountBalanceWalletIcon className="icon-bottom-bar" />
-            <div className="text-icon-bottom-bar">Nạp tiền</div>
-          </div>
-          <div
-            className={`grid-item ${selectedButton === 3 ? "selected" : ""}`}
-            onClick={() => handleButtonClick(3)}
-          >
-            <AccountCircleIcon className="icon-bottom-bar" />
-            <div className="text-icon-bottom-bar">Tài khoản</div>
-          </div>
+
+          {isMobile &&
+            (localStorage.getItem("accessToken") ? (
+              // Hiển thị nút đăng kí với tên người dùng từ JSON của API
+              <div
+                className="user-controls btn-profile"
+                onClick={handleProfileButtonClick}
+              >
+                <img
+                  src="https://shopmailk.com/unknown-avatar.jpeg"
+                  alt="avatar"
+                ></img>
+                <div>
+                  <div className="name-user-navbar">{registerUserName}</div>
+                  <div className="name-user-navbar wallet-user">
+                    {loading ? "Loading..." : formatAmount(balance)}
+                  </div>
+                </div>
+                {showProfileNavBar && (
+                  <div className="information-me">
+                    <div>
+                      <strong>ID: {idUser}</strong>
+                    </div>
+                    <div>
+                      <strong>
+                        Số dư: {loading ? "Loading..." : formatAmount(balance)}
+                      </strong>
+                    </div>
+                    <Link to="/profile">
+                      <div className="btn-profile-me padding-5px">
+                        Quản lí tài khoản
+                      </div>
+                    </Link>{" "}
+                    <div
+                      className="btn-profile-me"
+                      onClick={handleLogoutButtonClick}
+                    >
+                      Đăng xuất
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div
+                className={`grid-item ${
+                  selectedButton === 3 ? "selected" : ""
+                }`}
+                onClick={() => handleButtonClick(3)}
+              >
+                <AccountCircleIcon className="icon-bottom-bar" />
+                <div className="text-icon-bottom-bar">Tài khoản</div>
+              </div>
+            ))}
         </div>
       </div>
       {showLoginForm && (

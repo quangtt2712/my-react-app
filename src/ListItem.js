@@ -396,14 +396,17 @@ const ListItem = () => {
             {products.map((item) => (
               <Link to="/item-detail" key={item.id}>
                 <div className="body-list-item">
-                  {item.imageProducts &&
-                    item.imageProducts.length > 0 &&
-                    console.log(
-                      item.imageProducts[0].baseURL
-                    ) // Log the URL
+                  {
+                    item.imageProducts &&
+                      item.imageProducts.length > 0 &&
+                      console.log(item.imageProducts[0].baseURL) // Log the URL
                   }
                   <img
-                    src={item.imageProducts && item.imageProducts.length > 0 ? item.imageProducts[0].baseURL : ""}
+                    src={
+                      item.imageProducts && item.imageProducts.length > 0
+                        ? item.imageProducts[0].baseURL
+                        : ""
+                    }
                     alt=""
                     className="body-list-item-img"
                   ></img>
@@ -417,7 +420,9 @@ const ListItem = () => {
                       </div>
 
                       <div className="price-item">
-                        {formatAmount(item.price)}
+                        {formatAmount(
+                          item.price - item.price * (item.sale / 100)
+                        )}
                       </div>
                     </div>
                     <div>

@@ -1,43 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Register from "./Register";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useUserLogin } from "../src/hook/userLogin.js";
+//6LcKF-opAAAAADCf2x3QTQWkEZrWDHYuv86bPpOb
 const Login = ({ handleDataFromChild }) => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  const {
+    loginUser,
+    loading,
+    error,
+    loggedInUser,
+    notFoundError,
+    badRequestError,
+  } = useUserLogin();
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const username = formData.get("username");
-    const password = formData.get("password");
 
-    try {
-      const response = await fetch(
-        "https://shopaccduyanh.azurewebsites.net/api/User/Login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
-
-      if (response.ok) {
-        const userData = await response.json();
-        localStorage.setItem("accessToken", userData.accessToken);
-        handleDataFromChild(userData.accessToken);
-      } else {
-        console.log(response);
-      }
-    } catch (error) {
-      console.error("Error:", error);
+    if (!recaptchaToken) {
+      setSubmitted(true);
+      setRecaptchaToken(false);
+      return;
     }
+
+    const formData = new FormData(e.target);
+    const userData = {
+      username: formData.get("username"),
+      password: formData.get("password"),
+    };
+
+    userData.recaptchaToken = recaptchaToken;
+    setSubmitted(true);
+
+    await loginUser(userData);
+  
   };
+  useEffect(() => {
+    if (submitted && loggedInUser) {
+      console.log(loggedInUser);
+      handleRegisterSuccess(loggedInUser); // Call the onRegisterSuccess callback if provided
+      setSubmitted(false);
+    }
+  }, [loggedInUser, submitted]);
   const handleRegisterSuccess = (data) => {
     if (data === null) {
       console.log("null");
     } else {
       console.log(data);
+      localStorage.setItem('accessToken', data.accessToken);
+
       handleDataFromChild(data);
     }
   };
@@ -69,6 +85,12 @@ const Login = ({ handleDataFromChild }) => {
               name="username"
               placeholder="Tên đăng nhập"
             />
+                        {error?.UserName &&
+              error.UserName.map((msg, idx) => (
+                <p key={idx} className="error-message">
+                  {msg}
+                </p>
+              ))}
           </div>
           <div className="form-group">
             <input
@@ -77,13 +99,36 @@ const Login = ({ handleDataFromChild }) => {
               name="password"
               placeholder="Mật khẩu"
             />
+                        {error?.Password &&
+              error.Password.map((msg, idx) => (
+                <p key={idx} className="error-message">
+                  {msg}
+                </p>
+              ))}
+            {notFoundError && <p className="error-message">{notFoundError}</p>}
+            {badRequestError && (
+              <p className="error-message">{badRequestError}</p>
+            )}
           </div>
-          <button type="submit" className="btn btn-primary">
+          <ReCAPTCHA
+            sitekey="6LcmRfIpAAAAAGO85QbPxEZ5z0YsReegvi-g9vOv"
+            onChange={(val) => setRecaptchaToken(val)}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "15px",
+            }}
+          ></ReCAPTCHA>{" "}
+          {submitted && !recaptchaToken && (
+            <p className="error-message">Vui lòng xác minh reCAPTCHA.</p>
+          )}
+          <button type="submit" className="btn btn-primary" disabled={loading}>
             ĐĂNG NHẬP
           </button>
           <button type="button" className="btn" onClick={handleRegisterClick}>
             Đăng kí
           </button>
+          {error?.general && <p className="error-message">{error.general}</p>}
         </form>
       ) : (
         <Register onRegisterSuccess={handleRegisterSuccess} />

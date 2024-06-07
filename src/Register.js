@@ -1,53 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Login";
+import useRegister from "../src/hook/registerHook.js"; // Ensure the correct path to your hook
+import ReCAPTCHA from "react-google-recaptcha";
+import { useUserLogin } from "../src/hook/userLogin.js";
+
 
 const Register = ({ onRegisterSuccess }) => {
+  const [username, setUsername] = useState(""); // State để lưu username
+  const [password, setPassword] = useState("");
+  const {
+    loginUser,
+    loggedInUser,
+    notFoundError,
+    badRequestError,
+  } = useUserLogin();
+  const {
+    registerUser,
+    loading,
+    error,
+    conflictError,
+    registeredUser,
+    resetErrors,
+  } = useRegister();
+  useEffect(() => {
+    // Đảm bảo chỉ log khi inforUser thay đổi
+    if (registeredUser || loggedInUser) {
+      
+      console.log(registeredUser);
+      if (registeredUser) {
+        console.log("a");
+        const userData = {
+          username: username,
+          password: password,
+        };
+        loginUser(userData);
+  
+        onRegisterSuccess(loggedInUser); // Call the onRegisterSuccess callback if provided
+      }
+
+    }
+  }, [registeredUser, loggedInUser]);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [submitted, setSubmitted] = useState(false); // State để theo dõi xem đã nhấn nút đăng ký chưa
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const username = formData.get("username");
-    const password = formData.get("password");
+    resetErrors(); // Reset errors on form submission
 
-    try {
-      const registerResponse = await fetch(
-        "https://shopaccduyanh.azurewebsites.net/api/User/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
-
-      if (registerResponse.ok) {
-        const loginResponse = await fetch(
-          "https://shopaccduyanh.azurewebsites.net/api/User/Login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-          }
-        );
-        if (loginResponse.ok) {
-          const userData = await loginResponse.json();
-          setLoginForm(true);
-          localStorage.setItem("accessToken", userData.accessToken);
-          onRegisterSuccess(userData.accessToken);
-        } else {
-          <alert>Đăng nhập thất bại</alert>;
-        }
-      } else {
-        <alert>Đăng kí thất bại</alert>;
-      }
-    } catch (error) {
-      console.error("Error:", error);
+    if (!recaptchaToken) {
+      setSubmitted(true);
+      setRecaptchaToken(false);
+      return;
     }
-  };
 
+    const formData = new FormData(e.target);
+    const userData = {
+      username: formData.get("username"),
+      password: formData.get("password"),
+      confirmPassword: formData.get("confirmPassword"), // Add this field if required
+    };
+    userData.recaptchaToken = recaptchaToken;
+
+    setUsername(userData.username); // Lưu username vào state
+    setPassword(userData.password);
+    await registerUser(userData);
+  
+  };
   const [showLoginForm, setLoginForm] = useState(false);
 
   const handleonLoginClick = () => {
@@ -73,6 +91,13 @@ const Register = ({ onRegisterSuccess }) => {
               name="username"
               placeholder="Tên đăng nhập"
             />
+            {error?.UserName &&
+              error.UserName.map((msg, idx) => (
+                <p key={idx} className="error-message">
+                  {msg}
+                </p>
+              ))}
+            {conflictError && <p className="error-message">{conflictError}</p>}
           </div>
           <div className="form-group">
             <input
@@ -81,13 +106,48 @@ const Register = ({ onRegisterSuccess }) => {
               name="password"
               placeholder="Mật khẩu"
             />
+            {error?.Password &&
+              error.Password.map((msg, idx) => (
+                <p key={idx} className="error-message">
+                  {msg}
+                </p>
+              ))}
           </div>
-          <button type="submit" className="btn btn-primary">
+          <div className="form-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Xác nhận mật khẩu"
+            />
+            {error?.ConfirmPassword &&
+              error.ConfirmPassword.map((msg, idx) => (
+                <p key={idx} className="error-message">
+                  {msg}
+                </p>
+              ))}
+          </div>
+          <ReCAPTCHA
+            sitekey="6LcmRfIpAAAAAGO85QbPxEZ5z0YsReegvi-g9vOv"
+            onChange={(val) => setRecaptchaToken(val)}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "15px",
+            }}
+          ></ReCAPTCHA>
+          {submitted && !recaptchaToken && (
+            <p className="error-message">
+              Vui lòng xác minh reCAPTCHA trước khi đăng ký.
+            </p>
+          )}
+          <button type="submit" className="btn btn-primary" disabled={loading}>
             ĐĂNG KÝ
           </button>
           <button type="button" className="btn" onClick={handleonLoginClick}>
             Đã có tài khoản? Đăng nhập
           </button>
+          {error?.general && <p className="error-message">{error.general}</p>}
         </form>
       ) : (
         <Login />

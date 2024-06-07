@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormWeb from "./FormWeb";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -13,7 +13,47 @@ import CategoryIcon from "@mui/icons-material/Category";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import PetsIcon from "@mui/icons-material/Pets";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { useGetUserById } from "./hook/userHook";
+import { jwtDecode } from "jwt-decode";
 const InforNick = () => {
+  const [userName, setUserName] = useState(null);
+  const [idUser, setIdUser] = useState(null);
+  const [coin, setCoin] = useState(null);
+  const [createDateNick, setCreateDateNick] = useState("");
+  const { loading1, error, notFoundError, getInforUser, inforUser } =
+    useGetUserById();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const id = parseInt(decodedToken.id);
+      getInforUser(id);
+    }
+  }, []);
+  function formatDate(dateTimeString) {
+    // Kiểm tra nếu dateTimeString không tồn tại hoặc là undefined
+    if (!dateTimeString) {
+      return ""; // hoặc giá trị mặc định khác bạn muốn đặt
+    }
+
+    // Tiếp tục xử lý nếu dateTimeString tồn tại
+    const datePart = dateTimeString.split("T")[0];
+    const [year, month, day] = datePart.split("-");
+    return `${day}-${month}-${year}`;
+  }
+
+  useEffect(() => {
+    if (inforUser) {
+      console.log(inforUser);
+      setIdUser(inforUser.id);
+      setCoin(inforUser.wallet.balance);
+      setUserName(inforUser.userName);
+      const formattedDate = formatDate(inforUser.createdDate);
+      console.log(inforUser.createDate);
+      setCreateDateNick(formattedDate);
+    }
+  }, [inforUser]);
   return (
     <>
       <FormWeb>
@@ -26,9 +66,9 @@ const InforNick = () => {
                   alt="avatar"
                 ></img>
                 <div>
-                  <div>taolaprovip</div>
+                  <div>{userName}</div>
                   <div>
-                    <strong>ID: 1081271</strong>
+                    <strong>ID: {idUser}</strong>
                   </div>
                 </div>
               </div>
@@ -108,7 +148,7 @@ const InforNick = () => {
                       ID
                     </div>
                     <div className="title-flex-description-profile-customer">
-                      1081271
+                      {idUser}
                     </div>
                   </div>
                   <div className="flex-description-profile-customer">
@@ -116,7 +156,7 @@ const InforNick = () => {
                       Tên tài khoản
                     </div>
                     <div className="title-flex-description-profile-customer">
-                      taolaprovip
+                      {userName}
                     </div>
                   </div>
                   <div className="flex-description-profile-customer">
@@ -132,7 +172,7 @@ const InforNick = () => {
                       Ví chính
                     </div>
                     <div className="title-flex-description-profile-customer">
-                      0 đ
+                      {coin} đ
                     </div>
                   </div>
                   <div className="flex-description-profile-customer">
@@ -148,7 +188,7 @@ const InforNick = () => {
                       Ngày tham gia
                     </div>
                     <div className="title-flex-description-profile-customer">
-                      06/05/2024
+                      {createDateNick}
                     </div>
                   </div>
                   <div>
